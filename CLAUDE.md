@@ -23,6 +23,6 @@ Full plan: see [maaden-build-plan.md](maaden-build-plan.md).
 
 **Floor scope** (~25 hrs): Al + DAP stochastic (GBM), gold held at LTM, 3-yr horizon, quarterly LTM leverage test, 2 policies (none, collar), antithetic, 6-page report.
 
-Current phase: 1a (inputs)
+Current phase: 1b (v0.1 built; next: Opus review, then Phase 2)
 
 Commands: pytest; python scripts/run_all.py

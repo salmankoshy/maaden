@@ -2,7 +2,7 @@
 
 ## 1. Drift convention (v0.1 zero; v0.2 $\mu=\pi$; historical as sensitivity)
 
-_TBD_
+v0.1 uses zero drift (mu = 0, so E[S_t] = S_0): a 12-month credit view should not extrapolate 16 years of aluminium price history. The fitted historical drift is reported in results.json (`mu_hat`); `drift_mode = historical` in assumptions.csv switches it on as a sensitivity. Sigma is the annualized sample volatility of monthly log returns, 2010-01 to the anchor month.
 
 ## 2. Real vs nominal (fit real, re-inflate at $\pi$)
 
@@ -10,15 +10,17 @@ _TBD_
 
 ## 3. Margin model (unit-cost anchor vs linear regression; back-test)
 
-_TBD_
+EBITDA_Al = (b P - c) Q FX, P = Pink Sheet aluminium price. b = realized price / Pink Sheet average over H1-26 (production-weighted realized price); c = b Pbar - EBITDA/(Q FX), Q = H1-26 production. This makes the model reproduce H1-26 EBITDA exactly (test f). Q = production in every period, including the back-test, because FRP is sold separately (FY25: 309 kmt FRP alongside 593 kmt primary sales) and 2026 sales volumes are not disclosed, so production is the only volume measure consistent across periods. c is therefore per tonne produced. Back-test (Q3-25, Q4-25, FY24, FY25, period-average Pink prices, b and c held at H1-26 values) under-predicts actual Al EBITDA by 30-54%: see results.json `backtest`. The H1-26 anchor does not extrapolate to earlier periods, so the unit cost c is not stable; treat model EBITDA levels as anchored to H1-26 only.
 
 ## 4. Group aggregation in v0.1 (fixed vs scaled bounds)
 
-_TBD_
+Scaling Al alone to group overstates group volatility, and holding everything else fixed understates it. v0.1 reports both. fixed: non-Al LTM held at its actual value to Q2-26 (phosphate + bmnm - corporate = 11,500 SAR m), so group LTM = Al LTM + 11,500 (lower bound on volatility). scaled: group LTM = Al LTM / Al share of group LTM (0.2996), perfect co-movement (upper bound).
 
 ## 5. LTM construction from half-year data
 
 Quarterly data exists, so LTM is built from quarters. Before the simulation start (Q3-25..Q2-26), actual quarterly Al EBITDA is spread evenly over the three months of each quarter. Jul-Sep 2026 is not yet reported: the unit-cost model is applied to actual Pink Sheet prices for those months.
+
+Implementation (v0.1): the 12-month history ends at the anchor month (Oct-26). Nov-25..Dec-25 = Q4-25 EBITDA / 3 per month; Jan-Jun 2026 = Q1-26 and Q2-26 / 3; Jul-Oct 2026 (not yet reported) = unit-cost model on actual Pink Sheet prices (Oct-26 included because its price is observed). Simulated months 1..12 are Nov-26..Oct-27; covenant tests at months 3, 6, 9, 12.
 
 ## 6. Gross vs net debt; lease treatment
 
@@ -30,7 +32,7 @@ Company target range is 2-3x ND/EBITDA (Q1-26 release p1). Covenant levels are n
 
 ## 8. Corporate cost treatment
 
-_TBD_
+corporate_ebitda is DERIVED, not sourced: sum of Al, phosphate and bmnm segment EBITDA minus group EBITDA, per period (positive = corporate cost / eliminations; Q1-26 group converted from USD at 3.75). Used via its Q3-25..Q2-26 LTM (1,714 SAR m) in `fixed` mode. Checked: non-Al LTM + Al LTM = group LTM exactly.
 
 ## 9. OU vs GBM per series (ADF result, half-life CI)
 
@@ -70,7 +72,7 @@ _TBD_
 
 ## 18. Antithetic CI method; multiplicity correction
 
-_TBD_
+Antithetic pairs (Z, -Z): p-hat is the mean of pair means, CI from the sample std of pair means over n/2 pairs, normal approximation (95%). With zero hits the CI is replaced by the rule-of-three bound p < 3/n. No multiplicity correction in v0.1 (two thresholds, reported separately).
 
 ## 19. Data gaps
 

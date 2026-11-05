@@ -79,4 +79,22 @@ breach_threshold_low,2.5,x,,Analyst assumption; see docs/decisions.md,,2026-11-0
 breach_threshold_high,3.0,x,,Analyst assumption; see docs/decisions.md,,2026-11-04,,= top of company target range
 covenant_test_freq_months,3,months,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Default; covenant terms not disclosed
 price_anchor_date,2026-10-01,date,,Derived from rows cited in note,,2026-11-04,,Last month in inputs/prices_monthly.csv
-corporate_ebitda,NOT_FILLED,,,Segment note; not in extract (derive from group minus segments in checks only),,,,
+corporate_ebitda,123,SAR m,Q2-26,DERIVED,,2026-11-04,,"sum(al,phosphate,bmnm EBITDA) - group EBITDA; positive = corporate cost/eliminations"
+corporate_ebitda,619.00,SAR m,Q1-26,DERIVED,,2026-11-04,,"sum(al,phosphate,bmnm EBITDA) - group EBITDA; positive = corporate cost/eliminations; group converted from USD m at 3.75"
+corporate_ebitda,702,SAR m,Q4-25,DERIVED,,2026-11-04,,"sum(al,phosphate,bmnm EBITDA) - group EBITDA; positive = corporate cost/eliminations"
+corporate_ebitda,270,SAR m,Q3-25,DERIVED,,2026-11-04,,"sum(al,phosphate,bmnm EBITDA) - group EBITDA; positive = corporate cost/eliminations"
+corporate_ebitda,149,SAR m,Q2-25,DERIVED,,2026-11-04,,"sum(al,phosphate,bmnm EBITDA) - group EBITDA; positive = corporate cost/eliminations"
+corporate_ebitda,1440,SAR m,FY25,DERIVED,,2026-11-04,,"sum(al,phosphate,bmnm EBITDA) - group EBITDA; positive = corporate cost/eliminations"
+sim_n_paths,10000,paths,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Even number; antithetic pairs
+sim_seed,42,,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Rule 4
+sim_n_months,12,months,,Analyst assumption; see docs/decisions.md,,2026-11-04,,v0.1 horizon
+months_per_year,12,months,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Unit constant (dt = 1/months_per_year)
+price_fit_start,2010-01-01,date,,Analyst assumption; see docs/decisions.md,,2026-11-04,,GBM fit window start; end = price_anchor_date
+drift_mode,zero,,,Analyst assumption; see docs/decisions.md,,2026-11-04,,zero | historical
+ci_level,0.95,,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Normal-approx CI on pair means
+percentiles,"5,25,50,75,95",,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Percentiles of month-12 leverage
+zero_hit_bound_k,3,,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Rule of three: p < k/n when no breaches
+calib_quarters,"Q1-26,Q2-26",,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Basis b and unit cost c anchored on H1-26
+ltm_hist_quarters,"Q3-25,Q4-25,Q1-26,Q2-26",,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Reported quarters feeding the LTM and non-Al LTM
+backtest_periods,"Q4-25,Q3-25,FY25,FY24",,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Periods with production volumes for the margin back-test
+nd_anchor_period,31-Dec-25,,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Balance sheet date for net debt
