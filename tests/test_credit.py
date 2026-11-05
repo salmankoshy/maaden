@@ -49,3 +49,18 @@ def test_placeholders_not_read(inp):
                             "repay_share_phi"}
     src = open(credit.__file__, encoding="utf-8").read()
     assert not any(k in src for k in bad.key)
+
+
+def test_waterfall_first_year_by_hand(inp):
+    capex = inp["capex_guidance"]
+    w = credit.waterfall(inp["ebitda"], capex, inp)
+    interest = inp["r"] * inp["borrowings"]
+    tax = inp["tau"] * (inp["ebitda"] - inp["da"] - interest)
+    fcf = inp["ebitda"] - interest - tax - capex - inp["nci"]
+    assert w["D"][1] == pytest.approx(inp["borrowings"] - fcf, rel=1e-12)
+    assert w["L"][0] == pytest.approx((w["D"][1] - inp["cash"] - inp["time_deposits"]) / inp["ebitda"], rel=1e-12)
+
+
+def test_tax_floor_at_zero(inp):
+    w = credit.waterfall(inp["da"] * 0.5, 0.0, inp)
+    assert (w["tax"] == 0).all()

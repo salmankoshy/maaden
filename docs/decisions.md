@@ -92,3 +92,15 @@ Antithetic pairs (Z, -Z): p-hat is the mean of pair means, CI from the sample st
 ## 20. Credit core: add1 ingest
 
 `source/maaden_extracted_inputs_add1.csv` (97 rows) is appended to `assumptions.csv` by `scripts/ingest_add1.py`, values as strings, mapped by column name because the source column order differs. Existing rows are unchanged. Scenario settings are separate rows with source `ANALYST`. The four PLACEHOLDER rows are present in the file but no credit code reads them. `scripts/ingest_extracted.py` rebuilds the file from the first extract only, so running it requires re-running `ingest_add1.py`.
+
+## 21. Credit core waterfall
+
+- Net debt = borrowings - cash - time deposits, leases excluded: the company's own definition, and it reproduces the reported 1.3x. Leases-in is reported beside it.
+- Annual steps 2026-2030 from the 31-Dec-25 audited balance sheet: it is the last audited base. H1-26 balance sheet is pending.
+- Maturities are refinanced: gross debt follows free cash flow only, so a maturity changes nothing in the debt path. Refinancing risk is shown separately in the maturity table, not modeled.
+- Cash and time deposits are held constant: all surplus or deficit goes through debt, so net debt moves one-for-one with free cash flow.
+- EBITDA flat in nominal SAR with no EBITDA from new capacity: conservative, since capex earns nothing in the horizon. Capex and flat EBITDA are both nominal; no inflation is applied (the inflation row is a PLACEHOLDER and is not read).
+- If capex is low enough for D to go negative, interest turns into income at the same rate. Not floored: the tested region has D well above zero, and a floor would add a kink for no benefit.
+- +100 bp "floating share only" is a blended rate r + floating share x 1%, with the share held at its 31-Dec-25 value (fixed sukuk share of principal). Applying it to all debt is computed beside it as a bound.
+- Breakeven reports the upper end of the bisection bracket, so L_2030 is just above x at that capex. Bracket width is in `credit_capex_search_tol`.
+- Tax base uses `tau_eff`, which includes severance fees; FY25 D&A and NCI dividends held flat.
