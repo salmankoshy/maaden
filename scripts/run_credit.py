@@ -6,9 +6,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
-from src import credit, credit_xlsx  # noqa: E402
+from src import credit, credit_xlsx, plots  # noqa: E402
+from src.inputs import Assumptions  # noqa: E402
 from src.report_utils import clean, git_hash  # noqa: E402
 
 RES = ROOT / "results"
@@ -55,10 +57,25 @@ def write_outputs(out):
         f.write(json.dumps(clean(out), indent=2, sort_keys=True) + "\n")
 
 
+def breakeven_chart(inp, table):
+    a = Assumptions()
+    capex = np.arange(a.num("credit_chart_capex_low"), a.num("credit_chart_capex_high") + a.num("credit_chart_capex_step"),
+                      a.num("credit_chart_capex_step"))
+    curves, points = {}, []
+    for i, (k, m) in enumerate(inp["multipliers"].items()):
+        curves[f"x{m:.1f}"] = np.array([credit.waterfall(m * inp["ebitda"], c, inp)["L"][-1] for c in capex])
+        points += [(i, r["breakeven_capex"], r["threshold"]) for r in table if r["scenario"] == k]
+    (RES / "figures").mkdir(parents=True, exist_ok=True)
+    plots.credit_breakeven(capex, curves, sorted(inp["thresholds"].values()),
+                           (a.num("target_nd_ebitda_low", "policy"), a.num("target_nd_ebitda_high", "policy")),
+                           inp["capex_guidance"], points, RES / "figures" / "credit_breakeven.png")
+
+
 def main():
     out = build()
     write_outputs(out)
     credit_xlsx.build(RES / "maaden_credit_model.xlsx", credit.load_inputs(), out["breakeven"])
+    breakeven_chart(credit.load_inputs(), out["breakeven"])
     print(f"wrote {RES / 'credit.json'} and credit tables")
     return out
 
