@@ -1,6 +1,5 @@
-"""One command -> results/results.json + results/figures/v01_hist.png. Never fetches data."""
+"""One command -> results/results.json, figures, and the credit core outputs. Never fetches data."""
 import json
-import subprocess
 import sys
 from pathlib import Path
 
@@ -10,26 +9,8 @@ sys.path.insert(0, str(ROOT))
 import numpy as np  # noqa: E402
 
 from src import analysis, plots, simulate  # noqa: E402
-
-
-def git_hash():
-    try:
-        return subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True,
-                              check=True).stdout.strip()
-    except Exception:
-        return "unknown"
-
-
-def clean(o):
-    if isinstance(o, dict):
-        return {k: clean(v) for k, v in o.items()}
-    if isinstance(o, (list, tuple)):
-        return [clean(v) for v in o]
-    if isinstance(o, (np.floating, float)):
-        return "inf" if np.isinf(o) else float(o)
-    if isinstance(o, (np.integer,)):
-        return int(o)
-    return o
+from src.report_utils import clean, git_hash  # noqa: E402
+import run_credit  # noqa: E402
 
 
 def main():
@@ -86,6 +67,7 @@ def main():
                         list(thresholds.values()), {k_: cur[k_] for k_ in res["mode"]},
                         res_dir / "figures" / "v01_hist.png", clip_max=thresholds["high"] * 2)
     print(f"wrote {res_dir / 'results.json'} and figures/v01_hist.png")
+    run_credit.main()
     return out
 
 

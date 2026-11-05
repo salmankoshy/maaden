@@ -102,3 +102,13 @@ def test_first_breach_year_is_in_horizon(inp):
 
 def test_nonpositive_ebitda_is_infinite_leverage(inp):
     assert np.isinf(credit.waterfall(0.0, 0.0, inp)["L"]).all()
+
+
+def test_results_file_matches_code():
+    import json
+    from pathlib import Path
+    r = json.loads((Path(credit.__file__).resolve().parents[1] / "results" / "credit.json").read_text())
+    assert r["metrics"]["net_debt"] == pytest.approx(21626.45, abs=1e-6)
+    assert len(r["breakeven"]) == 6
+    assert len(r["maturities"]) == 6
+    assert len(r["git_hash"]) == 40

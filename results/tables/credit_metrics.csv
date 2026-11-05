@@ -1,0 +1,12 @@
+metric,value
+net_debt,21626.449999999997
+net_debt_incl_leases,23041.299999999996
+leverage,1.3383532396806732
+leverage_incl_leases,1.4259112568847079
+interest_cover_borrowings,8.756224836487974
+interest_cover_finance_cost,7.438043158049786
+liquidity,25252.97
+floating_share,0.8258886040475479
+rate_shock_cost,268.6519
+ebitda_cushion_low,0.4646587041277308
+ebitda_cushion_high,0.5538822534397756

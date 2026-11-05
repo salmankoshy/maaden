@@ -1,0 +1,191 @@
+{
+  "base": {
+    "balance_sheet": "31-Dec-25",
+    "capex_guidance_2026": 15500.0,
+    "da": 4498.19,
+    "ebitda": 16159.0,
+    "ebitda_period": "FY25",
+    "multipliers": {
+      "flat": 1.0,
+      "minus10": 0.9,
+      "minus20": 0.8
+    },
+    "nci": 716.25,
+    "r": 0.0538,
+    "r_shock_all": 0.0638,
+    "r_shock_floating": 0.06205888604047548,
+    "shock_bp": 100.0,
+    "tau": 0.1498,
+    "thresholds": {
+      "high": 3.0,
+      "low": 2.5
+    }
+  },
+  "breakeven": [
+    {
+      "breakeven_capex": 15638.737678527832,
+      "breakeven_capex_shock_all_debt": 15305.321216583252,
+      "breakeven_capex_shock_floating": 15363.29984664917,
+      "first_breach_year": 2030,
+      "first_breach_year_shock_floating": 2030,
+      "multiplier": 1.0,
+      "scenario": "flat",
+      "threshold": 2.5
+    },
+    {
+      "breakeven_capex": 17113.41619491577,
+      "breakeven_capex_shock_all_debt": 16755.173206329346,
+      "breakeven_capex_shock_floating": 16817.44337081909,
+      "first_breach_year": 2030,
+      "first_breach_year_shock_floating": 2030,
+      "multiplier": 1.0,
+      "scenario": "flat",
+      "threshold": 3.0
+    },
+    {
+      "breakeven_capex": 13527.553081512451,
+      "breakeven_capex_shock_all_debt": 13206.560611724854,
+      "breakeven_capex_shock_floating": 13262.393474578857,
+      "first_breach_year": 2030,
+      "first_breach_year_shock_floating": 2030,
+      "multiplier": 0.9,
+      "scenario": "minus10",
+      "threshold": 2.5
+    },
+    {
+      "breakeven_capex": 14854.767322540283,
+      "breakeven_capex_shock_all_debt": 14511.423110961914,
+      "breakeven_capex_shock_floating": 14571.118354797363,
+      "first_breach_year": 2030,
+      "first_breach_year_shock_floating": 2030,
+      "multiplier": 0.9,
+      "scenario": "minus10",
+      "threshold": 3.0
+    },
+    {
+      "breakeven_capex": 11416.375637054443,
+      "breakeven_capex_shock_all_debt": 11107.800006866455,
+      "breakeven_capex_shock_floating": 11161.487102508545,
+      "first_breach_year": 2030,
+      "first_breach_year_shock_floating": 2030,
+      "multiplier": 0.8,
+      "scenario": "minus20",
+      "threshold": 2.5
+    },
+    {
+      "breakeven_capex": 12596.118450164795,
+      "breakeven_capex_shock_all_debt": 12267.680168151855,
+      "breakeven_capex_shock_floating": 12324.800491333008,
+      "first_breach_year": 2030,
+      "first_breach_year_shock_floating": 2030,
+      "multiplier": 0.8,
+      "scenario": "minus20",
+      "threshold": 3.0
+    }
+  ],
+  "git_hash": "3e54d91b13e8128ce3db4327825935f08e5ca177",
+  "maturities": [
+    {
+      "principal": 2807.08,
+      "share": 0.086295141878758,
+      "year": "2026"
+    },
+    {
+      "principal": 2631.61,
+      "share": 0.08090085010742779,
+      "year": "2027"
+    },
+    {
+      "principal": 3147.43,
+      "share": 0.096758168061993,
+      "year": "2028"
+    },
+    {
+      "principal": 4323.25,
+      "share": 0.1329051798051144,
+      "year": "2029"
+    },
+    {
+      "principal": 7622.71,
+      "share": 0.23433704808934105,
+      "year": "2030"
+    },
+    {
+      "principal": 11996.75,
+      "share": 0.3688036120573657,
+      "year": "2031+"
+    }
+  ],
+  "metrics": {
+    "ebitda_cushion": {
+      "high": 0.5538822534397756,
+      "low": 0.4646587041277308
+    },
+    "floating_share": 0.8258886040475479,
+    "interest_cover_borrowings": 8.756224836487974,
+    "interest_cover_finance_cost": 7.438043158049786,
+    "leverage": 1.3383532396806732,
+    "leverage_incl_leases": 1.4259112568847079,
+    "liquidity": 25252.97,
+    "net_debt": 21626.449999999997,
+    "net_debt_incl_leases": 23041.299999999996,
+    "rate_shock_cost": 268.6519
+  },
+  "waterfall_at_guidance": [
+    {
+      "capex": 15500.0,
+      "debt": 35716.8056551592,
+      "ebitda": 16159.0,
+      "fcf": -3287.3856551592,
+      "interest": 1744.702796,
+      "leverage": 1.5417931589305773,
+      "nci_dividends": 716.25,
+      "tax": 1485.4328591592002,
+      "year": 2026
+    },
+    {
+      "capex": 15500.0,
+      "debt": 39154.558828598485,
+      "ebitda": 16159.0,
+      "fcf": -3437.7531734392796,
+      "interest": 1921.564144247565,
+      "leverage": 1.754538574701311,
+      "nci_dividends": 716.25,
+      "tax": 1458.939029191715,
+      "year": 2027
+    },
+    {
+      "capex": 15500.0,
+      "debt": 42749.55744488329,
+      "ebitda": 16159.0,
+      "fcf": -3594.9986162848054,
+      "interest": 2106.5152649785987,
+      "leverage": 1.9770151274759138,
+      "nci_dividends": 716.25,
+      "tax": 1431.2333513062058,
+      "year": 2028
+    },
+    {
+      "capex": 15500.0,
+      "debt": 46508.99403007591,
+      "ebitda": 16159.0,
+      "fcf": -3759.4365851926195,
+      "interest": 2299.926190534721,
+      "leverage": 2.209667926856607,
+      "nci_dividends": 716.25,
+      "tax": 1402.2603946578988,
+      "year": 2029
+    },
+    {
+      "capex": 15500.0,
+      "debt": 50440.39010184705,
+      "ebitda": 16159.0,
+      "fcf": -3931.3960717711343,
+      "interest": 2502.183878818084,
+      "leverage": 2.4529624420971006,
+      "nci_dividends": 716.25,
+      "tax": 1371.9621929530513,
+      "year": 2030
+    }
+  ]
+}
