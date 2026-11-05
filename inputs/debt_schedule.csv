@@ -1,1 +1,1 @@
-instrument,amount_usd_m,rate_type,rate_or_spread,maturity,source_page
+instrument,amount,currency,rate_type,rate_or_spread,maturity,amortization,source,page

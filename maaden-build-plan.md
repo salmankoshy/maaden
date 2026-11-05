@@ -1,21 +1,42 @@
-# MA'ADEN CAPEX FINANCING STRESS TEST — BUILD PLAN
-Owner: Salman Koshy. Repo: `maaden-stress` (public, GitHub). Window: Oct 24 – Dec 16, 2026. Solo.
-Course: INDENG 174 (proposal Oct 24, draft Nov 30, final Dec 16). Recruiting: JPM GCB Riyadh (Nov 6), ADMIS (Nov), Pure Consulting.
+# MA'ADEN CAPEX FINANCING STRESS TEST: BUILD PLAN v2
+
+Owner: Salman Koshy. Repo: `maaden-stress` (public GitHub; local dir `maaden`). Window: Oct 24 to Dec 16, 2026. Solo.
+Course: INDENG 174. Proposal submitted Oct 24. Draft due Nov 30 (submit Nov 20). Final + video + code due Dec 16, 11 pm PT.
+Recruiting: JPM GCB Riyadh (closes Nov 6), ADMIS (Nov), Pure Consulting.
+Version: v2, Oct 27, 2026. Supersedes v1 (Oct 24). Changes in §10.
+
+## Status (Oct 27)
+
+| Item | Status |
+|---|---|
+| Proposal | Submitted Oct 24 |
+| Phase 0 scaffold | Done. Commit `7d3e9b4`, 4 tests pass |
+| Phase 0 fix-ups | Pending (Prompt 0.2) |
+| Inputs | Not filled |
+| v0.1 | Not started. Target tag Oct 31 |
 
 ---
 
-## 0. Operating rules (paste into every chat; also lives in CLAUDE.md)
+## 0. Operating rules (paste into every chat; also in CLAUDE.md)
 
-1. I supply every financial input from a filing or dataset. AI scaffolds, never invents numbers. Unknown → placeholder + exact source location to find it.
-2. Every input lives in `inputs/assumptions.csv` with columns `key,value,unit,source,date_retrieved`. Code reads from there. No hardcoded numbers in model code.
-3. Deterministic: `seed=42` everywhere. Every figure regenerable by one command.
-4. Build order is fixed: v0.1 (1 commodity, 1 yr) → v0.2 (3 commodities, 5 yr, capex ladders) → v0.3 (disruptions, policies, CRN) → v1.0 (variance reduction, validation, memo). Never skip ahead.
-5. Each phase ends with: tests pass, one PNG, README updated, git tag.
-6. Resume/README claims never exceed what the code at that tag does.
-7. Timebox. If a phase runs >150% of budget, cut scope per the kill list, don't extend.
-8. Plain-language explanation of every modeling choice goes in `docs/decisions.md`. I must be able to defend each in 10 seconds.
+1. I supply every financial input from a filing or dataset. AI scaffolds, never invents numbers. Unknown → `NOT_FILLED` + exact source location.
+2. Every input lives in `inputs/assumptions.csv` with columns `key,value,unit,period,source,page,date_retrieved`. Code reads from there. No literals in `src/`.
+3. No silent data repair. Any gap fill, interpolation or outlier removal is logged in `docs/decisions.md` with a reason, or not done.
+4. Deterministic: `seed=42`. All random arrays are pre-drawn once per run and passed to every scenario and policy (common random numbers). One command regenerates every figure.
+5. Data snapshots are committed (`prices_monthly.csv`, `cpi_monthly.csv`). `run_all.py` never fetches.
+6. Units: internal currency SAR m. Prices in USD per unit (Pink Sheet). FX peg from assumptions. Nominal cash flows; real vs nominal choices stated in `decisions.md`.
+7. Build order fixed: v0.1 → v0.2 → v0.3 → v1.0. Never skip ahead.
+8. Each phase ends with: tests pass, at least one PNG, README updated, git tag, AI transcripts exported to `docs/ai_transcripts/`.
+9. Resume and README claims never exceed what the code at that tag does.
+10. Every analytic claim in the report is backed by a test or a simulation number with a CI.
+11. Timebox. Phase over 150% of budget → cut per kill list. Never extend.
+12. Plain-language reason for every modeling choice in `docs/decisions.md`. Defensible in 10 seconds.
 
-Kill list (cut in this order if behind): Arabic summary → dashboard → policies (d)(e) → gold → validation → disruption module. Floor = aluminium + DAP, GBM, 3-yr, 2 policies, antithetic, 6-page report.
+**AI transcripts:** syllabus rule, missing transcript = half grade. Export every Claude Code and claude.ai session the same day.
+
+**Kill list** (cut in this order): Arabic summary → dashboard → policies (d)(e) → jump/bootstrap robustness → gold stochastic (hold gold EBITDA at LTM; never zero it) → OOS validation → disruption module.
+
+**Floor scope** (~25 hrs): Al + DAP stochastic (GBM), gold held at LTM, 3-yr horizon, quarterly LTM leverage test, 2 policies (none, collar), antithetic, 6-page report.
 
 ---
 
@@ -23,12 +44,12 @@ Kill list (cut in this order if behind): Arabic summary → dashboard → polici
 
 | Task | Model | Where | Why |
 |---|---|---|---|
-| Architecture, modeling decisions, challenge/critique, memo prose, interview prep | Opus | claude.ai chat (Project: "Ma'aden Stress") | Judgment |
-| Writing code, tests, plots, README, refactors | Sonnet via Claude Code | Terminal in repo | Speed, tool use |
-| Independent audit of model + report | Opus, fresh chat, no prior context | claude.ai | Grader hasn't seen the work |
-| Data extraction from PDFs (filings) | Sonnet with file upload | claude.ai or Code | Cheap, verify by eye |
+| Architecture, modeling decisions, critique, memo prose, interview prep | Opus | claude.ai Project "INDENG 174" | Judgment |
+| Code, tests, plots, README, refactors | Sonnet via Claude Code | Terminal in repo | Speed, tool use |
+| Independent audit of model + report | Opus, fresh chat, no history | claude.ai | Grader has not seen the work |
+| Data extraction from filings | Sonnet with file upload | claude.ai or Code | Cheap; verify every row by page |
 
-Keep one claude.ai Project with: this plan, `assumptions.csv`, `decisions.md`, latest README. Update after each phase.
+Project "INDENG 174" holds this plan, the handoff and the course index. After each phase upload `assumptions.csv`, `decisions.md`, README.
 
 ---
 
@@ -37,23 +58,30 @@ Keep one claude.ai Project with: this plan, `assumptions.csv`, `decisions.md`, l
 ```
 maaden-stress/
 ├── CLAUDE.md                 # rules + current phase + commands
-├── README.md                 # generated by build_readme.py from results
+├── README.md                 # generated by build_readme.py; includes "How to run"
+├── maaden-build-plan.md      # this file
+├── requirements.txt          # pinned; Python 3.11+
+├── .gitattributes            # * text=auto eol=lf
 ├── inputs/
-│   ├── assumptions.csv       # every number, sourced
-│   ├── prices_monthly.csv    # Pink Sheet extract: date, aluminum, dap, gold, brent
-│   ├── segments.csv          # H1/FY segment sales, EBITDA, volumes
-│   └── debt_schedule.csv     # instrument, amount, rate type, maturity
+│   ├── assumptions.csv       # key,value,unit,period,source,page,date_retrieved
+│   ├── prices_monthly.csv    # Pink Sheet latest release: date,aluminum,dap,phosphate_rock,gold,brent
+│   ├── cpi_monthly.csv       # US CPI-U (v0.2)
+│   ├── segments.csv          # period,segment,sales,ebitda,volume,volume_unit,realized_price,source,page
+│   ├── capex_ladders.csv     # ladder,year,capex_sar_m,segment,volume_added,online_lag_q (v0.2)
+│   └── debt_schedule.csv     # instrument,amount,currency,rate_type,rate_or_spread,maturity,amortization,source,page
 ├── src/
-│   ├── prices.py             # fit + simulate OU/GBM, Cholesky
-│   ├── disruptions.py        # Poisson route outages
-│   ├── financials.py         # revenue→EBITDA→FCF→debt waterfall→ratios
-│   ├── policies.py           # hedge, capex-deferral, fixed/float, tenor ladder
-│   ├── simulate.py           # orchestrates N paths, CRN/antithetic
-│   ├── analysis.py           # percentiles, breach prob + CI, replication count
+│   ├── draws.py              # pre-drawn random arrays, antithetic pairing, CRN streams
+│   ├── prices.py             # fit + simulate GBM/OU, deflation, residual diagnostics, Cholesky
+│   ├── disruptions.py        # Poisson outages
+│   ├── financials.py         # segment EBITDA → quarterly waterfall → LTM ratios
+│   ├── policies.py           # collar, capex deferral, fixed/float, tenor ladder
+│   ├── simulate.py           # orchestrates paths, policies on common draws
+│   ├── analysis.py           # breach p + CI, paired diffs, frontier, VR report, validation
 │   └── plots.py
-├── tests/                    # pytest: grad-free sanity checks (see §6)
+├── tests/
 ├── scripts/
 │   ├── fetch_pink_sheet.py
+│   ├── fetch_cpi.py          # v0.2
 │   ├── run_all.py            # one command → all figures + results.json
 │   └── build_readme.py
 ├── results/                  # figures/*.png, results.json, tables/*.csv
@@ -62,254 +90,539 @@ maaden-stress/
 │   ├── proposal.md
 │   ├── draft_report.md
 │   ├── final_report.md
-│   └── credit_memo.md        # 2 pages
+│   ├── credit_memo.md
+│   └── ai_transcripts/
+├── source/                   # filing PDFs (gitignored)
 └── project_files/            # filing extracts (markdown), Moody's note text
 ```
 
 ---
 
-## 3. Phase plan with prompts
+## 3. Phase plan
 
-### Phase 0 — Setup + proposal (Oct 24, 4 hrs)
+### Phase 0: Setup + proposal (Oct 24). DONE
 
-**Claude Code prompt (Sonnet):**
-```
-Initialize repo `maaden-stress` with the layout in BUILD_PLAN.md §2. Create CLAUDE.md containing §0 rules verbatim plus "Current phase: 0". Write scripts/fetch_pink_sheet.py: download https://thedocs.worldbank.org/en/doc/18675f1d1639c7a34d463f59263ba0a2-0050012025/related/CMO-Historical-Data-Monthly.xlsx, read sheet "Monthly Prices" (header row 5, dates like 2025M12), extract columns "Aluminum", "DAP", "Phosphate rock", "Gold", "Crude oil, Brent", write inputs/prices_monthly.csv with ISO dates. Add a test that the CSV has ≥120 rows and no NaNs after 2010. Create inputs/assumptions.csv with header only. Create empty docs files. Commit "phase 0 scaffold".
-```
+Commit `7d3e9b4`. Proposal submitted.
 
-**Me (manual, 1.5 hrs):** Pull Ma'aden latest annual report + most recent quarterly from saudiexchange.sa. Save PDFs to `source/` (gitignored). Fill `segments.csv` and `debt_schedule.csv` by hand from the borrowings note and segment note. Fill `assumptions.csv` rows: segment sales/EBITDA/volumes, cash, total borrowings, capex guidance, PIF stake 65.22%, rating Baa1/baa3.
+#### Prompt 0.2: fix-ups (Claude Code, Oct 27, 30 min)
 
-**Sonnet extraction helper (claude.ai, upload the PDF):**
-```
-From this Ma'aden filing, extract into a CSV with columns key,value,unit,source_page: (1) segment sales and EBITDA for Phosphate, Aluminum, Base Metals & New Minerals; (2) sales volumes by product; (3) total borrowings, split by instrument and fixed/floating if disclosed; (4) cash and time deposits; (5) capex for the period and any guidance; (6) any leverage ratio or covenant language; (7) any hedging/derivatives note. Quote the page number for each. If a value is not in the document, write NOT_FOUND. Do not estimate.
-```
-I verify every row against the page before it enters assumptions.csv.
+Before running: get the URL of the latest monthly "CMO Historical Data" file from the World Bank Commodity Markets (Pink Sheet) page.
 
-**Opus prompt for proposal (claude.ai):**
 ```
-Write the INDENG 174 project proposal (≤1.5 pages) answering exactly four questions: problem/goal, simulation model, analytic techniques, desired scope of results. Context: [paste §4 model spec below + assumptions.csv]. Course expects simulation of an enterprise-scale system with real data. Mention: correlated OU/GBM price processes fit to World Bank monthly data, compound-Poisson export disruptions, cash-flow and debt waterfall, leverage-breach probability with confidence intervals, antithetic variates + common random numbers for policy comparison, out-of-sample validation on 2020–22. Terse, no filler. Plain academic register.
+Phase 0 fix-ups. Read CLAUDE.md and maaden-build-plan.md.
+1. scripts/fetch_pink_sheet.py: remove the phosphate-rock forward-fill; keep NaN as NaN. Set the URL to [PASTE LATEST URL]. Re-fetch; commit inputs/prices_monthly.csv. Print the last date.
+2. tests/test_prices_csv.py: no-NaN check from 2010-01 applies only to model columns aluminum, dap, gold.
+3. Create a Python 3.11+ venv. Write requirements.txt pinning numpy, pandas, scipy, statsmodels, matplotlib, openpyxl, requests, pytest. Re-run tests.
+4. Add .gitattributes: "* text=auto eol=lf".
+5. inputs/assumptions.csv: columns key,value,unit,period,source,page,date_retrieved. Rows = the v0.1 gate keys in plan §3 Phase 1a, all NOT_FILLED. inputs/segments.csv and debt_schedule.csv headers per plan §2.
+6. Create docs/ai_transcripts/.gitkeep. Create docs/decisions.md with one heading per item in plan §9. Under "Data gaps" log: phosphate rock 2023-11 missing in source; left NaN; series not a model driver.
+7. CLAUDE.md: point to maaden-build-plan.md; copy §0 verbatim; "Current phase: 1a (inputs)"; commands: pytest; python scripts/run_all.py.
+Run tests. Commit "phase 0 fix-ups".
 ```
-Submit by 11pm Sat.
 
 ---
 
-### Phase 1 — v0.1 (Oct 25–31, 6 hrs)
+### Phase 1a: Inputs (Oct 27-28, 2 hrs, manual)
 
-Goal: aluminium only, GBM, 12 monthly steps, EBITDA via margin regression, ND/EBITDA histogram, 10k paths. Runs end to end.
+**Documents into `source/`:**
 
-**Claude Code prompt:**
+| # | Document | Where | Gives |
+|---|---|---|---|
+| 1 | FY25 audited consolidated financial statements (with notes) | Saudi Exchange → 1211 → Financial Statements; Ma'aden IR | Balance sheet, borrowings, segments, zakat/tax, D&A, dividends, commitments, derivatives |
+| 2 | H1-26 interim condensed financial statements | Same | Anchor balance sheet + segments |
+| 3 | H1-25 interim financial statements | Same | LTM bridge |
+| 4 | Q2-26 and FY25 results releases / investor presentations | Ma'aden IR | Sales volumes, realized prices |
+| 5 | FY25 annual report | Ma'aden IR | Capex program, guidance, PIF stake |
+| 6 | Moody's rating action | Argaam | Baa1 / baa3 |
+
+Note: the Mar 5, 2026 PDF on Saudi Exchange is the results release, not the financial statements.
+
+**Extraction prompt (Sonnet, claude.ai, one PDF per run):**
+
 ```
-Phase 1. Read CLAUDE.md and inputs/. Implement:
+From this Ma'aden filing, extract into CSV columns key,value,unit,period,source_page. First state the unit header of each statement (SAR '000 or SAR m). Extract:
+(1) segment sales and EBITDA (or segment result + D&A if EBITDA is not shown) for Phosphate, Aluminium, Base Metals & New Minerals, and corporate/eliminations;
+(2) group revenue and EBITDA;
+(3) sales volumes and realized prices by product (aluminium t, DAP t, ammonia t, gold oz);
+(4) borrowings: current, non-current, by instrument, fixed/floating, margins, maturity table; lease liabilities separately;
+(5) cash and cash equivalents; time/short-term deposits;
+(6) capex for the period, guidance, capital commitments;
+(7) covenant language, including test frequency and ratio definitions;
+(8) hedging/derivatives note;
+(9) cost of sales breakdown (raw materials, gas/energy, sulfur, ammonia, coke, caustic, freight) and any feedstock pricing terms;
+(10) D&A, zakat and income tax expense, profit before zakat and tax, dividends paid.
+Quote the page for every value. If absent write NOT_FOUND. Do not estimate, convert, or compute.
+```
+
+I verify every row against its page before it enters `assumptions.csv`.
+
+**v0.1 gate: no `NOT_FILLED` allowed in these keys**
+
+| Key group | Periods | Source |
+|---|---|---|
+| `al_sales`, `al_ebitda`, `al_volume_t`, `al_realized_usd_t` | H1-26, FY25, FY24, H1-25 | Segment note + results release |
+| `group_ebitda` | FY25, H1-26, H1-25 | Segment note / release |
+| `phosphate_ebitda`, `bmnm_ebitda`, `corporate_ebitda` | FY25, H1-26, H1-25 | Segment note |
+| `total_borrowings` (leases as separate row) | H1-26 | Balance sheet + borrowings note |
+| `cash_and_deposits` | H1-26 | Balance sheet |
+| `reported_nd_ebitda` | H1-26 | Release (reconciliation check only) |
+| `fx_sar_per_usd` | n/a | SAMA |
+| `breach_threshold_low`, `breach_threshold_high` | n/a | "Analyst assumption, decisions.md" until Phase 2 |
+| `covenant_test_freq_months` | n/a | Borrowings note; default 3 until found |
+| `price_anchor_date` | n/a | Last month in `prices_monthly.csv` |
+
+Phase 3+ keys may stay `NOT_FILLED`: tax, D&A, dividends, SOFR, spread, capex ladders, debt schedule, PIF stake, ratings.
+
+**Sanity checks before commit**
+
+| Check | Formula | Expect |
+|---|---|---|
+| LTM bridge | $\text{EBITDA}_{\text{LTM}}=\text{FY25}+\text{H1-26}-\text{H1-25}$ | Positive, plausible |
+| Corporate gap | $\sum_s\text{EBITDA}_s-\text{EBITDA}_{\text{group}}$ | Positive gap (H1-25 was SAR 468m) |
+| Leverage reconcile | $\dfrac{\text{borrowings}-\text{cash}}{\text{EBITDA}_{\text{LTM}}}$ vs `reported_nd_ebitda` | Close. Settles gross vs net and lease treatment |
+| Al basis | $b=\dfrac{\text{realized price}}{\bar P_{\text{Pink Sheet, period}}}$ | Near 1 plus regional premium |
+| Al unit cost | $c=b\bar P-\dfrac{\text{EBITDA}_{Al}}{Q_{Al}\cdot\text{FX}}$ | Positive, stable across periods |
+
+Commit "inputs: H1-26/FY25/FY24/H1-25 hand-filled".
+
+---
+
+### Phase 1b: v0.1 (Oct 29-31, 6 hrs)
+
+Goal: Al stochastic (GBM), monthly steps, 12 months from anchor, unit-cost EBITDA, quarterly LTM leverage test, two group-aggregation bounds, 10k paths with antithetic. Runs end to end.
+
+**Prompt 1 (Claude Code):**
+
+```
+Phase 1b (v0.1). Read CLAUDE.md, maaden-build-plan.md §0 and §4, and inputs/. No literals in src/; every number comes from assumptions.csv.
+
+src/draws.py
+- make_draws(n_paths, n_months, n_factors, seed, antithetic=True) -> Z with shape (n_paths, n_months, n_factors). With antithetic, rows n/2..n-1 equal -Z of rows 0..n/2-1. Drawn once; every caller receives the same array.
 
 src/prices.py
-- fit_gbm(series) → (mu, sigma) from monthly log returns, annualized.
-- simulate_gbm(S0, mu, sigma, n_paths, n_months, rng) → array (n_paths, n_months+1). Use exact discretization: S_{t+Δ} = S_t · exp((μ − σ²/2)Δ + σ√Δ·Z).
+- fit_gbm(series, dt=1/12) -> (mu, sigma). With r = monthly log returns: $\hat\sigma^2=\mathrm{var}(r)/\Delta$, $\hat\mu=\bar r/\Delta+\hat\sigma^2/2$. Fit window from assumptions (default 2010-01 to anchor).
+- simulate_gbm(S0, mu, sigma, Z, dt): exact step $S_{t+\Delta}=S_t\exp\big((\mu-\tfrac12\sigma^2)\Delta+\sigma\sqrt{\Delta}Z\big)$.
+- drift_mode in assumptions: "zero" (default, $\mu=0$, so $E[S_t]=S_0$) or "historical" ($\hat\mu$, sensitivity).
 
 src/financials.py
-- segment_ebitda(price_path, volume, margin_fn): revenue = price × volume; EBITDA = margin_fn(price) × revenue. For v0.1 margin_fn is linear in price, fit on the two or more segment observations in inputs/segments.csv (H1-25, FY24, FY23). Document the fit in docs/decisions.md.
-- leverage(ebitda_annual, net_debt) → net_debt / ebitda.
+- al_ebitda_monthly(P, basis, unit_cost, volume_monthly, fx): $\text{EBITDA}=(bP-c)\,Q\cdot\text{FX}$ in SAR m. b and c anchored on H1-26 (formulas in plan §4). Volume = H1-26 monthly run-rate.
+- LTM: rolling 12-month sum. Months before the simulation start use actual Al EBITDA spread evenly within each half-year (H2-25 = FY25 - H1-25; H1-26). Log this in decisions.md.
+- group_ebitda_ltm(al_ltm, mode): "fixed" = other segments and corporate held at actual LTM (lower volatility bound); "scaled" = al_ltm / al_share (perfect co-movement, upper bound). Report both.
+- leverage(nd, ebitda_ltm) = nd / ebitda_ltm; if ebitda_ltm <= 0 return +inf (breach).
+- Net debt held at H1-26 actual (no waterfall in v0.1).
 
-src/simulate.py: run(n_paths=10_000, seed=42) → DataFrame of annual EBITDA and ND/EBITDA for year 1 for the aluminium segment scaled to group using the aluminium share of group EBITDA from assumptions.csv.
+src/analysis.py
+- Breach per path: any test date (every covenant_test_freq_months) with L > threshold, for both thresholds.
+- p_hat with CI from antithetic pair means: $\bar I_j=\tfrac12(I_j+I'_j)$, $\hat p\pm1.96\,s_{\bar I}/\sqrt{n/2}$. If p_hat = 0 report the bound $p<3/n$.
+- Percentiles (5,25,50,75,95) of L at month 12.
+- Jensen gap: $E[L]$ vs $ND/E[\text{EBITDA}_{\text{LTM}}]$.
+- p_hat under annual vs quarterly testing (same paths).
+- Margin back-test: unit-cost model vs actual Al EBITDA at FY24, FY25, H1-25 average prices; error table.
 
-src/analysis.py: percentiles (5,25,50,75,95), P(ND/EBITDA > 2.5) and > 3.0 with 95% CI (normal approx on Bernoulli).
+src/plots.py: histogram of month-12 L for both modes, vertical lines at both thresholds and current actual -> results/figures/v01_hist.png.
 
-src/plots.py: histogram of year-1 ND/EBITDA with vertical lines at 2.5 and 3.0 and the current actual.
+scripts/run_all.py: runs everything, writes results/results.json (seed, n_paths, git hash, anchor date, all outputs).
 
-scripts/run_all.py: runs everything, writes results/results.json and results/figures/v01_hist.png.
-
-tests/: (a) GBM with sigma=0 returns S0·exp(mu·t) exactly; (b) mean of simulated S_T within 1% of S0·exp(mu·T) at 100k paths; (c) breach probability is 0 when net_debt=0.
-
-All inputs from assumptions.csv. No literals in src/. Run tests, run run_all, show me the PNG, commit "v0.1", tag v0.1.
+tests/
+(a) GBM with sigma=0 returns S0*exp(mu*t) exactly.
+(b) mean of S_T at 200k paths within 4 standard errors of S0*exp(mu*T).
+(c) antithetic rows are exact negatives.
+(d) ebitda_ltm <= 0 is flagged as breach.
+(e) nd <= 0 with ebitda > 0 gives no breach.
+(f) unit-cost model reproduces H1-26 Al EBITDA exactly at the H1-26 average price.
+(g) LTM at month 12 equals the sum of months 1-12.
+(h) run_all twice gives identical results.json (excluding timestamp).
+Run tests, run run_all, show me the PNG, update README (what v0.1 does and does not do), commit "v0.1", tag v0.1.
 ```
 
 **Opus review prompt (after v0.1 runs):**
+
 ```
-Here is results.json, the PNG, decisions.md and assumptions.csv for v0.1 of a Monte Carlo leverage model for Ma'aden (aluminium segment only). Challenge it: (1) is the GBM drift from 10 years of history a sensible forecast or should drift be set to zero / forward-curve implied? (2) is scaling one segment to group leverage defensible for v0.1, and what's the honest caveat? (3) list the three assumptions an experienced credit analyst would attack first. Keep it to one page. Don't rewrite code.
+Here are results.json, the PNG, decisions.md and assumptions.csv for v0.1 of a Monte Carlo leverage model for Ma'aden (aluminium stochastic only, 12 months, quarterly LTM test). Challenge it: (1) drift: zero vs historical vs forward curve; which is defensible for a credit view? (2) the fixed vs scaled group-aggregation bounds: is the gap informative, and what is the honest caveat? (3) unit-cost anchor vs a linear margin regression, given the back-test errors; (4) the three assumptions an experienced credit analyst attacks first. One page. Do not rewrite code.
 ```
-Put the answers into decisions.md. Update README. Resume bullet goes live (present tense, "building").
+
+Answers go into `decisions.md`. README updated. Repo public. Resume bullet live, present tense ("building"). Tag by Oct 31.
 
 ---
 
-### Phase 2 — JPM freeze (Nov 1–7, 4 hrs)
+### Phase 2: JPM freeze + filing work (Nov 1-7, 4 hrs)
 
-No model work. Submit JPM app + HireVue. Pull borrowings note; settle breach thresholds; reconcile the $5.7B vs ~SAR 35bn debt discrepancy from the balance sheet. Add rows to assumptions.csv.
+No model code. JPM application + HireVue first.
+
+| Filing task | Output |
+|---|---|
+| Gross vs net debt, lease treatment; the \$5.7B vs ~SAR 35bn conflict | `decisions.md` + assumptions rows |
+| Covenant test frequency and ratio definitions | `covenant_test_freq_months` |
+| Maturity table | `debt_schedule.csv` |
+| Cost of sales: market-linked inputs (sulfur, ammonia, coke, caustic) vs administered (gas, own bauxite) | `decisions.md` "natural hedge" entry |
+| Attributable share of the \$110B program (JV partners?) and phasing | `capex_ladders.csv` draft (slow/base/fast) |
+| FY20, FY21, FY22 segment EBITDA and volumes (older annual reports) | `segments.csv` rows for Phase 6 validation |
+| $\tau_{\text{eff}}=\dfrac{\text{zakat + tax}}{\text{profit before zakat and tax}}$, D&A, dividends | assumptions |
+| SOFR (NY Fed), spread (sukuk / facility pricing), expected inflation $\pi$ | assumptions |
 
 **Opus prompt:**
+
 ```
-I have Ma'aden's borrowings note [paste] and Moody's Baa1/baa3 rationale [paste]. Covenant levels aren't disclosed. Propose the two leverage thresholds I should use as breach lines, each with a one-sentence justification a banker would accept, and the single sentence I say in an interview when asked "but what's the actual covenant?"
+I have Ma'aden's borrowings note [paste] and Moody's Baa1/baa3 rationale [paste]. Covenant levels are not disclosed. Propose the two leverage thresholds I should use as breach lines, each with a one-sentence justification a banker would accept; state whether a quarterly or semiannual LTM test is standard for this kind of facility; and give the single sentence I say in an interview when asked "but what's the actual covenant?"
 ```
+
+Email David (handoff §6). Export transcripts.
 
 ---
 
-### Phase 3 — v0.2 (Nov 8–14, 8 hrs)
+### Phase 3: v0.2 (Nov 8-14, 10 hrs)
 
-Goal: aluminium, DAP, gold; OU for Al and DAP, GBM for gold; Cholesky; 5-yr horizon; three capex ladders; debt waterfall with new issuance.
+Goal: Al, DAP, gold. OU in real terms for Al and DAP, GBM for gold. Correlated residual shocks. Quarterly waterfall over 5 years. Capex ladders linked to volumes. Cash. DSCR. Capex frontier.
 
-**Claude Code prompt:**
+**Prompt 3 (Claude Code):**
+
 ```
-Phase 3. Extend to three commodities.
+Phase 3 (v0.2). Read CLAUDE.md, plan §4, inputs/.
+
+scripts/fetch_cpi.py: US CPI-U monthly (FRED CPIAUCSL) -> inputs/cpi_monthly.csv. Commit the snapshot. run_all never fetches.
 
 src/prices.py
-- fit_ou(log_series) → (kappa, theta, sigma) via AR(1) regression on monthly log prices: x_{t+Δ} = x_t e^{−κΔ} + θ(1 − e^{−κΔ}) + ε, ε ~ N(0, σ²(1 − e^{−2κΔ})/(2κ)). Report half-life ln2/κ. Flag if κ not significant at 10% (then fall back to GBM and log the decision).
-- simulate_multi(models, corr, n_paths, n_months, rng): draw correlated Z via Cholesky of the log-return correlation matrix estimated on the same window; feed each model its own column. Support antithetic=True (pair Z with −Z).
+- Deflate Pink Sheet prices by CPI to anchor-date dollars. Fit and simulate real log prices; re-inflate at expected inflation pi from assumptions.
+- fit_ou(x, dt): OLS AR(1) $x_{t+1}=a+\phi x_t+\varepsilon$; $\kappa=-\ln\phi/\Delta$, $\theta=a/(1-\phi)$, $\sigma=\hat s_\varepsilon\sqrt{2\kappa/(1-\phi^2)}$. Half-life $\ln 2/\kappa$ with 90% CI by residual bootstrap (1,000 reps, seed 42).
+- Mean-reversion test: ADF with constant (statsmodels adfuller). If p > 0.10, fall back to GBM for that series; log it in decisions.md. Do not use the OLS t-stat on phi.
+- Diagnostics: standardized residuals per series; Q-Q plots -> results/figures/v02_qq.png; Jarque-Bera p-values in results.json.
+- Dependence: correlation matrix R of standardized residuals (not raw log returns) on the fit window and on 2020-01..2022-12. Total correlation $-\tfrac12\ln\det R$ for both. Rolling 36-month correlation plot.
+- simulate_multi(models, R, Z): shocks $\varepsilon=ZL^\top$ with $R=LL^\top$; exact OU step $x_{t+\Delta}=x_te^{-\kappa\Delta}+\theta(1-e^{-\kappa\Delta})+\sigma\sqrt{(1-e^{-2\kappa\Delta})/(2\kappa)}\,\varepsilon$. Z from src/draws.py (antithetic).
+- Option shocks="bootstrap": resample whole months of standardized residual vectors jointly (keeps cross-dependence and fat tails). Robustness run only; no antithetic in this mode.
 
-src/financials.py
-- Full group: revenue by segment = price × volume (volumes from segments.csv, flat unless assumptions.csv gives growth); EBITDA by segment via margin regression; group EBITDA = sum.
-- Capex ladder: three scenarios in assumptions.csv (slow/base/fast) as annual USD amounts 2026–2030.
-- Waterfall per year: FCF = EBITDA − tax − interest − capex − dividends (dividend policy from assumptions). If FCF < 0, new debt = −FCF. Interest = (SOFR_path + spread) × avg debt; SOFR path flat at assumptions value for v0.2.
-- Outputs per path per year: EBITDA, net debt, ND/EBITDA, DSCR = EBITDA / (interest + scheduled amortization).
+src/financials.py (quarterly step, anchor + 20 quarters)
+- Segment EBITDA $(b_sP_s-c_s)Q_s\cdot\text{FX}$ for Al, DAP-driven phosphate, gold (oz). Corporate cost: fixed SAR m per quarter = segment sum minus group (LTM).
+- Volumes: base run-rate plus capex_ladders.csv volume_added after online_lag_q.
+- Capex ladders slow/base/fast; scale factor s multiplies capex AND added volume together.
+- Tax: $\tau_{\text{eff}}\max(\text{EBITDA}-\text{DA}-\text{Int},0)$. Interest: $r\,D_{q-1}\Delta$, r = SOFR + spread (flat in v0.2).
+- Waterfall exactly as plan §4 (repay share phi, cash floor C_min, new debt for the remainder). Scheduled maturities refinanced at current r (debt level unchanged); amortization A enters DSCR.
+- Test dates every covenant_test_freq_months: $L=(D-C)/\text{EBITDA}_{\text{LTM}}$, EBITDA_LTM <= 0 = breach. DSCR per plan §4.
 
-src/analysis.py: fan-chart percentiles by year; breach probability by year and cumulative (any year) for each threshold, with CI; results by capex scenario.
+src/analysis.py
+- Fan-chart percentiles by quarter. Breach p by year and cumulative, both thresholds, antithetic pair-mean CI, per ladder.
+- Capex frontier: for s in the grid from assumptions, p(s) with CI on the same draws; report the largest s whose upper 95% bound <= p_max (assumption, default 0.05).
+- Test-frequency sensitivity: p under annual, semiannual, quarterly tests.
+- Jensen gap by year.
 
-src/plots.py: fan chart ND/EBITDA 2026–30 with threshold lines, one panel per capex scenario; DSCR fan chart.
+src/plots.py: fan chart of L 2026-31 per ladder with thresholds; DSCR fan; frontier p(s) with CI band; Q-Q; rolling correlations.
 
-tests: (a) OU with sigma=0 converges to theta; (b) correlation of simulated log returns within 0.05 of input at 100k paths; (c) with zero capex and positive FCF, net debt is non-increasing.
-
+tests:
+(a) OU with sigma=0 converges to theta.
+(b) OU long-run variance of x within 4 SE of $\sigma^2/(2\kappa)$.
+(c) simulated residual correlation within 0.02 of R at 100k paths.
+(d) zero capex and positive FCF -> D non-increasing.
+(e) s=0 -> no new debt when base FCF > 0.
+(f) antithetic pair-mean CI narrower than iid CI on a monotone test function.
+(g) deflate then re-inflate with pi=0 round-trips exactly.
+(h) cash never below C_min.
 Update run_all, results.json, README. Commit, tag v0.2.
 ```
 
-**Kill-rule checkpoint Nov 13.** If v0.2 doesn't run, drop to floor scope.
+**Kill-rule checkpoint Nov 13.** v0.2 must run end to end, or drop to floor scope.
 
 ---
 
-### Phase 4 — v0.3 (Nov 15–20, 8 hrs)
+### Phase 4: v0.3 (Nov 16-20, 8 hrs; Nov 15 lost to half marathon)
 
-Goal: disruption module; policies (a)(b)(c) with common random numbers; draft report; slides.
+Goal: disruptions; policies (a)(b)(c) on common draws; draft report; slides.
 
-**Claude Code prompt:**
+**Prompt 4 (Claude Code):**
+
 ```
-Phase 4.
+Phase 4 (v0.3).
 
-src/disruptions.py: compound Poisson. Outage arrivals ~ Poisson(λ per year), duration ~ Exponential(mean m months), effect = volume haircut h on export-dependent segments during outage. Parameters in assumptions.csv with a stated source (news/history of Gulf shipping disruptions). Returns a (n_paths, n_months) volume multiplier.
+src/disruptions.py: outage arrivals Poisson(lambda per year) via exponential gaps, rng.exponential(scale=1/lam); durations rng.exponential(scale=m) months; multiplier (1-h) on export volumes while ANY outage is active (overlaps do not stack). Dedicated pre-drawn stream (CRN). lambda, m, h come from a scenario grid in assumptions, each with a cited historical event (Gulf / Hormuz / Red Sea shipping). No fitting.
 
-src/policies.py, each takes the same random draws (common random numbers):
+src/policies.py (all consume the identical pre-drawn arrays):
 - none()
-- hedge_collar(segment='aluminum', ratio=0.5, floor_pct=0.90, cap_pct=1.15, tenor_months=12): realized price on hedged volume clipped to [floor, cap] of the price at hedge inception; roll each 12 months.
-- capex_defer(trigger=2.5, defer_frac=0.3): if prior-year ND/EBITDA > trigger, defer defer_frac of next year's growth capex to the following year.
+- hedge_collar(segment='aluminum', ratio, floor_pct, cap_pct, tenor_months=12): at each roll the reference is the model-implied forward $F_0=E[P_T\mid P_0]$ under the fitted process, not spot (prevents a free lunch from mean reversion). Hedged-volume price clipped to [floor_pct*F0, cap_pct*F0]. Zero-cost collar assumed; state it. Track hedge P&L separately.
+- capex_defer(trigger, defer_frac): if L at the last test date > trigger, defer defer_frac of next year's growth capex AND its volume ramp by one year. Track deferral cost = EBITDA forgone (SAR m) and its PV at the cost of debt.
 
-src/simulate.py: run_policies(policies, n_paths, seed) using identical Z draws across policies; return dict of result frames.
+src/simulate.py: run_policies(policies, draws) -> dict of result frames.
 
-src/analysis.py: policy comparison table: cumulative breach probability (2.5x, 3.0x), P95 ND/EBITDA 2030, mean cumulative new debt, each with CI; paired differences vs none() using CRN (report CI on the difference, not on the levels).
+src/analysis.py: table per policy: cumulative breach p (both thresholds), P95 L in 2030, mean cumulative new debt, deferral cost, each with CI. Paired differences vs none(): $\hat\Delta=\hat p_\pi-\hat p_0$ on common draws, CI from paired antithetic pair-means. Joint confidence via Bonferroni $z_{1-\alpha/(2K)}$. Flag the practical-significance threshold delta from assumptions.
 
-plots: policy comparison bar chart with CIs; fan chart overlay none vs hedge.
+plots: policy bar chart of paired differences with CIs; fan overlay none vs collar.
 
-tests: (a) λ=0 → multiplier all ones; (b) collar with floor=cap=1 reproduces inception price on hedged volume; (c) paired-difference CI narrower than independent-run CI.
-
+tests:
+(a) lambda=0 -> multiplier all ones.
+(b) collar with floor_pct=cap_pct=1 -> hedged price equals F0.
+(c) paired-difference CI narrower than independent-stream CI.
+(d) neutral parameters (ratio=0, defer_frac=0) reproduce none() exactly.
+(e) deferral cost = 0 when the trigger is never hit.
 Commit, tag v0.3.
 ```
 
 **Opus prompt for draft report + slides:**
+
 ```
-Using results.json, figures, decisions.md and assumptions.csv, write docs/draft_report.md with sections: Problem & motivation; Data; Model (prices, disruptions, financials, policies); Simulation design (paths, seed, antithetic, CRN); Preliminary results (fan charts, breach table, policy table); Limitations; Remaining work to final. Every number cited to results.json. Academic register, terse. Then write an 8-slide outline for a 6-minute in-class presentation: one claim per slide, figure reference per slide, ending on "what the story's ending will be."
+Using results.json, figures, decisions.md and assumptions.csv, write docs/draft_report.md with the final-report structure and a brief summary per section: Problem & motivation; Data; Analytic methods; Model (prices, disruptions, financials, policies); Simulation design (paths, seed, antithetic, CRN, test frequency); Preliminary results (fan charts, breach table, capex frontier, policy table) and their impact; Limitations; Further work to final. Every number cited to results.json. Academic register, terse. Then an 8-slide outline for an in-class presentation: one claim per slide, one figure per slide, ending on what the story's ending will be.
 ```
 
 ---
 
-### Phase 5 — Draft submit + present (Nov 30–Dec 2, 2 hrs)
-Submit Nov 30 11pm. Present Nov 30 or Dec 2.
+### Phase 5: Draft submit + present (2 hrs)
+
+- Submit draft **Nov 20** (graded on submission, 10%; away Nov 21-29). Attach AI transcripts.
+- Present **Dec 2** (back Nov 29).
 
 ---
 
-### Phase 6 — v1.0 (Dec 3–8, 7 hrs)
+### Phase 6: v1.0 (Dec 3-8, 7 hrs)
 
-Goal: policies (d)(e); variance reduction report; out-of-sample validation; replication-count analysis.
+Goal: policies (d)(e); variance-reduction report; replication analysis; out-of-sample validation.
 
-**Claude Code prompt:**
+**Prompt 6 (Claude Code):**
+
 ```
-Phase 6.
+Phase 6 (v1.0).
 
-src/policies.py: add fixed_float_mix(fixed_share) with a stochastic SOFR path (Vasicek, params in assumptions.csv, or two scenarios if fit is unstable), and tenor_ladder(schedule) that sets amortization profile of new issuance.
+src/policies.py:
+- fixed_float_mix(fixed_share): SOFR path by Vasicek $dr=a(b-r)\,dt+\sigma_r\,dW$, exact discretization, params in assumptions (or two deterministic scenarios if the fit is unstable). Dedicated pre-drawn stream.
+- tenor_ladder(schedule): amortization profile of new issuance and refinancing.
 
 src/analysis.py:
-- variance_reduction_report(): breach-probability SE with and without antithetic at equal path count; table.
-- replication_curve(): SE vs n_paths (1k…50k) to justify 10k.
-- validate_oos(): refit price models on 2014-01..2019-12 only; simulate 2020-01..2022-12; compare realized annual segment EBITDA (from segments.csv) against simulated P5–P95; coverage table + one chart.
-
-Add tests for each. Update run_all, README. Commit, tag v1.0.
+- variance_reduction_report(): breach-p SE with vs without antithetic at equal n; paired-difference SE with CRN vs independent streams; table.
+- replication_curve(): SE vs n in {1k, 2k, 5k, 10k, 20k, 50k}. Required n for absolute error $n\ge z^2\hat p(1-\hat p)/\varepsilon^2$ and relative error $n\ge z^2(1-\hat p)/(\varepsilon^2\hat p)$.
+- validate_oos(): refit price models on 2014-01..2019-12 only; simulate 2020-2022 from a 2019-12 anchor; coverage of realized FY20-22 segment EBITDA (segments.csv) by simulated P5-P95; table + one chart.
+- Optional (kill list): jumps. Flag standardized residuals |z| > 3 as jumps; $\hat\lambda_J$ = count / years; resample jump sizes; rerun headline p as robustness. Or report the shocks="bootstrap" run.
+Tests for each. Update run_all, README. Commit, tag v1.0.
 ```
 
-**Opus audit prompt (fresh chat, no history, attach repo zip or README+results+decisions):**
+**Opus audit prompt (fresh chat, no history; attach README, results.json, decisions.md, assumptions.csv):**
+
 ```
-You are a credit analyst at a corporate bank reviewing an intern's Monte Carlo leverage model for Ma'aden. You have not seen it before. Find: (1) any assumption that is unsourced or inconsistent across files; (2) any place the model is more precise than its inputs justify; (3) the single result a skeptical MD would challenge first and what the author should pre-empt; (4) three concrete improvements ranked by value/hour. Be blunt. One page.
+You are a credit analyst at a corporate bank reviewing an intern's Monte Carlo leverage model for Ma'aden. You have not seen it before. Find: (1) any assumption that is unsourced or inconsistent across files, including units (SAR m vs USD) and periods; (2) any place the model is more precise than its inputs justify; (3) any CI computed with an iid formula on antithetic or paired data; (4) the single result a skeptical MD challenges first and what the author should pre-empt; (5) three concrete improvements ranked by value per hour. Be blunt. One page.
 ```
-Fix what's cheap. Record the rest under Limitations.
+
+Fix what is cheap. Record the rest under Limitations.
 
 ---
 
-### Phase 7 — Report + memo (Dec 9–12, 6 hrs)
+### Phase 7: Report + memo (Dec 9-12, 6 hrs)
 
 **Opus prompt for final report:**
+
 ```
-Expand docs/draft_report.md into docs/final_report.md using v1.0 results. Add: design decisions, challenges, what I learned, next steps, software/approach trade-offs, whether results are physically reasonable, fit to the IEOR field. Every figure referenced. Keep it tight; no length requirement means no padding.
+Expand docs/draft_report.md into docs/final_report.md using v1.0 results. Cover every item in the course's final-report list: major design decisions; challenges; what I learned; next steps; how the software works and alternative approaches with trade-offs; experiment results; whether results are physically reasonable; what running the experiments taught me; fit to the class and the IEOR field (use plan §5). Include a "How to run" section (clone, venv, pip install -r requirements.txt, pytest, python scripts/run_all.py). Every figure referenced. No padding.
 ```
 
 **Opus prompt for credit memo:**
+
 ```
-Write docs/credit_memo.md, two pages, in the voice of a corporate banking analyst preparing a decision-committee note on Ma'aden's capex financing. Structure: Recommendation (one sentence); Borrower snapshot (PIF 65%, Baa1/baa3, segment mix, leverage today); Base case; Downside: breach probabilities under slow/base/fast capex; Mitigants compared (hedge, capex deferral, fixed/float, tenor) with the numbers; Recommended structure and why; Key risks and what would change the view. Numbers from results.json only. No adjectives.
+Write docs/credit_memo.md, two pages, as a corporate banking analyst's decision-committee note on Ma'aden's capex financing. Structure: Recommendation (one sentence); Borrower snapshot (PIF 65%, Baa1/baa3, segment mix, leverage today); Base case; Downside: breach probabilities by capex ladder and the capex frontier; Mitigants compared (hedge, capex deferral incl. its cost, fixed/float, tenor) with the numbers; Recommended structure and why; Key risks and what would change the view. Numbers from results.json only. No adjectives.
 ```
 
 ---
 
-### Phase 8 — Video + submit (Dec 13–16, 4 hrs)
-Record 10-min video from slides. Final polish. Submit Dec 16. Tag v1.0-final.
+### Phase 8: Video + submit (Dec 13-16, 4 hrs)
+
+Record the 10-min video from slides. Submit by Dec 16, 11 pm PT: final report, video, code, how-to-run, AI transcripts. Tag `v1.0-final`.
 
 ---
 
-### Stretch (only after Dec 5 with v1.0 done)
-- Streamlit dashboard: sliders for hedge ratio, capex scenario, threshold; live fan chart. Prompt: "Wrap simulate.run_policies in a Streamlit app with three controls and two charts; cache the base draws."
-- One-page Arabic executive summary of the memo. Opus, Hijazi-neutral formal business Arabic, then I edit.
+### Stretch (only after v1.0 is tagged)
+
+| Item | Note |
+|---|---|
+| Chance-constrained structure optimization | $\min_x E[\text{financing cost}+\text{hedge cost}+\text{deferral cost}]$ s.t. $\Pr[\text{breach}]\le p_{\max}$. Objective must carry the cost of deferral and hedging, or "defer everything" wins trivially. Small grid → ranking and selection (KN) on common draws; continuous → SAA on fixed paths, re-solve on a fresh seed (L15) |
+| Margin-call liquidity module | Handoff §9 #2. Build if David replies or ADMIS interview is scheduled |
+| Market reconciliation vs sukuk spread | Handoff §9 #3 |
+| Streamlit dashboard | Three controls (hedge ratio, ladder, threshold), two charts, cached draws |
+| Arabic executive summary | Opus draft, I edit |
 
 ---
 
-## 4. Model spec (reference for all prompts)
+## 4. Model spec (v2)
 
-**Prices.** Industrial metals/fertilizer: OU on log price,
-$$dx_t = \kappa(\theta - x_t)\,dt + \sigma\,dW_t,\qquad x_t=\ln S_t.$$
+**Prices.** Al and DAP: OU on real log price,
+$$dx_t=\kappa(\theta-x_t)\,dt+\sigma\,dW_t,\qquad x_t=\ln\!\left(\frac{S_t}{\text{CPI}_t}\right),\qquad S_t^{\text{nom}}=e^{x_t}\,\text{CPI}_0\,e^{\pi t}.$$
 Gold: GBM,
-$$dS_t = \mu S_t\,dt + \sigma S_t\,dW_t.$$
-Correlation via Cholesky on monthly log-return correlation matrix. Drift default: $\mu=0$ real (state it), sensitivity to historical $\mu$.
+$$dS_t=\mu S_t\,dt+\sigma S_t\,dW_t,\qquad \mu=\pi\ \text{(zero real drift; sensitivity: historical)}.$$
+v0.1 only: Al GBM with $\mu=0$ over 12 months. GBM drift estimator:
+$$\hat\mu=\frac{\bar r}{\Delta}+\frac{\hat\sigma^2}{2}.$$
+Fallback OU → GBM if ADF $p>0.10$.
 
-**Disruptions.** Outages $N(t)\sim\text{Poisson}(\lambda t)$, durations $D\sim\text{Exp}(m)$, volume multiplier $1-h$ during outage.
+**Dependence.** $\operatorname{corr}(dW^i,dW^j)=R_{ij}$ estimated on standardized residuals; Cholesky $R=LL^\top$. Summary:
+$$TC=-\tfrac12\ln\det R.$$
 
-**Financials (annual, per path).**
-$$\text{EBITDA}_t=\sum_s m_s(P_{s,t})\,P_{s,t}\,Q_{s,t},\quad
-\text{FCF}_t=\text{EBITDA}_t-\tau\,\text{EBIT}_t-r_t D_{t-1}-\text{Capex}_t-\text{Div}_t,$$
-$$D_t = D_{t-1} - \max(\text{FCF}_t,0)\cdot\phi + \max(-\text{FCF}_t,0),\qquad
-L_t=\frac{D_t - C_t}{\text{EBITDA}_t},\quad \text{DSCR}_t=\frac{\text{EBITDA}_t}{r_tD_{t-1}+A_t}.$$
-($\phi$ = share of surplus used to repay; $A_t$ = scheduled amortization.)
+**Disruptions.** $N(t)\sim\text{Poisson}(\lambda t)$, $D\sim\text{Exp}$ with mean $m$,
+$$M_t=1-h\cdot\mathbb{1}\{\text{any outage active at }t\}.$$
 
-**Breach.** $p=\Pr[\max_t L_t > \bar L]$, $\bar L\in\{2.5,3.0\}$, CI $\hat p\pm1.96\sqrt{\hat p(1-\hat p)/n}$.
+**Segment EBITDA** (SAR m; $P$, $c$ in USD per unit; $Q$ in units):
+$$\text{EBITDA}_{s,q}=(b_sP_{s,q}-c_s)\,Q_{s,q}\,M_q\cdot\text{FX},\qquad c_s=b_s\bar P_s^{\text{H1-26}}-\frac{\text{EBITDA}_s^{\text{H1-26}}}{Q_s^{\text{H1-26}}\cdot\text{FX}}.$$
+Group:
+$$\text{EBITDA}_q=\sum_s\text{EBITDA}_{s,q}-K_{\text{corp}}.$$
 
-**Policy comparison.** Same $Z$ across policies (CRN); report $\hat p_{\text{policy}}-\hat p_{\text{none}}$ with paired CI. Antithetic pairs $(Z,-Z)$.
+**Quarterly waterfall.**
+$$\text{Int}_q=r_qD_{q-1}\Delta,\qquad \text{Tax}_q=\tau_{\text{eff}}\max(\text{EBITDA}_q-\text{DA}_q-\text{Int}_q,0),$$
+$$\text{FCF}_q=\text{EBITDA}_q-\text{Tax}_q-\text{Int}_q-\text{Capex}_q-\text{Div}_q.$$
+Surplus ($\text{FCF}_q\ge0$):
+$$D_q=D_{q-1}-\min(\phi\,\text{FCF}_q,\,D_{q-1}),\qquad C_q=C_{q-1}+\text{FCF}_q-(D_{q-1}-D_q).$$
+Deficit ($\text{FCF}_q<0$):
+$$u_q=\min\!\big(-\text{FCF}_q,\ \max(C_{q-1}-C_{\min},0)\big),\qquad C_q=C_{q-1}-u_q,\qquad D_q=D_{q-1}+(-\text{FCF}_q-u_q).$$
+
+**Ratios at test dates.**
+$$\text{EBITDA}^{\text{LTM}}_q=\sum_{k=0}^{3}\text{EBITDA}_{q-k},\qquad L_q=\frac{D_q-C_q}{\text{EBITDA}^{\text{LTM}}_q},\qquad \text{DSCR}_q=\frac{\text{EBITDA}^{\text{LTM}}_q}{\text{Int}^{\text{LTM}}_q+A^{12\text{m}}_q}.$$
+
+**Breach.** $\mathcal T$ = test dates every `covenant_test_freq_months`; $\bar L\in\{2.5,3.0\}$:
+$$B=\mathbb{1}\Big\{\exists\,q\in\mathcal T:\ L_q>\bar L\ \ \text{or}\ \ \text{EBITDA}^{\text{LTM}}_q\le0\Big\}.$$
+
+**Estimator with antithetic pairs.**
+$$\bar B_j=\tfrac12(B_j+B_j'),\qquad \hat p=\frac{2}{n}\sum_{j=1}^{n/2}\bar B_j,\qquad \hat p\pm z_{1-\delta/2}\frac{s_{\bar B}}{\sqrt{n/2}}.$$
+Zero hits: $p<3/n$.
+
+**Policy comparison** (common draws, paired):
+$$\hat\Delta_\pi=\hat p_\pi-\hat p_0,\qquad \text{CI from paired pair-means},\qquad z_{1-\alpha/(2K)}\ \ (K=4:\ 2.50).$$
+
+**Capex frontier.**
+$$s^*=\max\big\{s:\ \text{UCB}_{95}[\hat p(s)]\le p_{\max}\big\},\qquad p_{\max}=0.05.$$
+
+**Jensen check.** Report $E[L_q]$ alongside $\dfrac{E[D_q-C_q]}{E[\text{EBITDA}^{\text{LTM}}_q]}$. $L$ is convex in EBITDA, so the deterministic base case understates expected leverage.
 
 ---
 
-## 5. Prompts for using the project in recruiting
+## 5. Course mapping (for the report's "fit to class" section)
+
+| Model component | Lecture / source |
+|---|---|
+| GBM = compounded returns, lognormal | L11 slide 24 |
+| Input fitting, Q-Q, GOF caveats | L11-12 |
+| Dependence as input; rank correlation | L12 |
+| Poisson process via exponential gaps | L5, Discussion 4 |
+| CI for proportions; CLT | L5-6, Discussion 3 |
+| Sample size $n\ge z^2\hat\sigma^2/\varepsilon^2$, relative error | L10 slides 20, 22; L11 slides 4, 14 |
+| CI for the difference, not overlapping CIs; multiplicity | L13; L14 slides 9-10 |
+| Simulation estimates relative differences better than absolute levels | L14 slide 3 (policy ranking more robust than breach levels) |
+| Statistical vs practical significance ($\delta$) | L14 slides 6-7; L15 slide 10 |
+| R&S (KN), SAA for structure optimization | L15 slides 8, 13-14 |
+| Antithetic variates | Not in slides through L15; cite Ross, *Simulation*, Ch. 9 |
+
+---
+
+## 6. Recruiting prompts
 
 **Interview drill (Opus):**
 ```
-You are a JPMorgan Global Corporate Banking associate in Riyadh interviewing me about this project [attach memo + README]. Ask one question at a time, hardest first: assumptions, why simulation, what the covenant really is, how PIF support changes the credit, how you'd structure the facility, what the hedge costs. After each of my answers, grade 1–5 and give the better answer in two sentences. Ten questions.
+You are a JPMorgan Global Corporate Banking associate in Riyadh interviewing me about this project [attach memo + README]. Ask one question at a time, hardest first: assumptions, why simulation, what the covenant really is, how PIF support changes the credit, how you'd structure the facility, what the hedge costs, why the capex frontier sits where it does. After each answer, grade 1-5 and give the better answer in two sentences. Ten questions.
 ```
 
-**ADMIS version:** same, persona = FCM energy desk head; focus on hedge sizing, margin calls, basis, forward curve vs historical drift.
+**ADMIS version:** persona = FCM energy desk head. Focus: hedge sizing, margin calls, basis, forward curve vs model-implied forward, natural hedge from market-linked inputs. Bridge: the NYSE compute-exchange white paper §5 (mean-reverting energy with jumps, correlated cost/price shocks as a natural hedge) is the same model family.
 
-**Pure version:** persona = consulting engagement manager; focus on how I'd present this to a client, what the recommendation is, what I'd do with two more weeks.
+**Pure version:** persona = consulting engagement manager. Focus: client presentation, the recommendation, what two more weeks would buy.
 
 ---
 
-## 6. Tests that must exist before any tag
-- Zero-volatility reproduces deterministic path.
-- Simulated moments match analytical at large n.
+## 7. Tests that must exist before any tag
+
+- Zero volatility reproduces the deterministic path (GBM and OU).
+- Simulated moments match analytic values within 4 SE (GBM mean, OU long-run variance $\sigma^2/(2\kappa)$).
 - Correlation recovered within tolerance.
-- Zero capex + positive FCF → non-increasing debt.
-- Policies with neutral parameters reproduce none().
-- `run_all.py` from clean clone produces identical results.json (seed).
+- Antithetic rows are exact negatives; pair-mean CI narrower than iid CI on a monotone function.
+- Unit-cost model reproduces anchor-period EBITDA exactly.
+- LTM identity: month-12 LTM equals the sum of months 1-12.
+- EBITDA_LTM ≤ 0 counts as breach.
+- Zero capex + positive FCF → non-increasing debt; cash never below floor.
+- Policies with neutral parameters reproduce `none()` exactly.
+- `run_all.py` from a clean clone produces identical `results.json`.
 
 ---
 
-## 7. Weekly ritual (Friday, 15 min)
-1. Does `run_all.py` run from clean clone? 
-2. Tag matches README matches resume?
-3. Hours spent vs budget. Over 150% → invoke kill list.
-4. One line in decisions.md: what I decided this week and why.
-5. Update CLAUDE.md "Current phase".
+## 8. Weekly ritual (Friday, 15 min)
+
+1. Does `run_all.py` run from a clean clone?
+2. Tag = README = resume bullet?
+3. Hours spent vs budget. Over 150% → kill list.
+4. AI transcripts for the week exported to `docs/ai_transcripts/`?
+5. One line in `decisions.md`: what I decided this week and why.
+6. Update CLAUDE.md "Current phase".
+
+---
+
+## 9. decisions.md headings (seed)
+
+1. Drift convention (v0.1 zero; v0.2 $\mu=\pi$; historical as sensitivity)
+2. Real vs nominal (fit real, re-inflate at $\pi$)
+3. Margin model (unit-cost anchor vs linear regression; back-test)
+4. Group aggregation in v0.1 (fixed vs scaled bounds)
+5. LTM construction from half-year data
+6. Gross vs net debt; lease treatment
+7. Breach thresholds and test frequency
+8. Corporate cost treatment
+9. OU vs GBM per series (ADF result, half-life CI)
+10. Correlation on residuals; fit window; 2020-22 stress
+11. Capex ladders: attributable share, volume linkage, online lag
+12. Waterfall: $\phi$, $C_{\min}$, refinancing
+13. Tax: $\tau_{\text{eff}}$ definition
+14. Natural hedge: market-linked vs administered input costs
+15. Disruption scenario parameters and sources
+16. Collar strike reference (model-implied forward, zero cost)
+17. Deferral cost definition
+18. Antithetic CI method; multiplicity correction
+19. Data gaps (phosphate rock 2023-11 left NaN; not a model driver)
+
+---
+
+## 10. Changelog v1 → v2
+
+| Change | Reason |
+|---|---|
+| Anchor periods H1-26 / FY25 / FY24 / H1-25 (was H1-25 / FY24 / FY23) | 10 months of 2026 already known; newer filings published |
+| Pink Sheet refreshed to latest release; snapshot committed; run_all never fetches | Stale anchor; reproducibility under World Bank revisions |
+| Phosphate-rock forward-fill removed; no silent repair rule | Fabricated value broke rule 1 |
+| Python 3.11+, pinned requirements, `.gitattributes` | 3.8 is end-of-life; reproducibility |
+| v0.1 gate trimmed to keys v0.1 uses | Over-gating threatened Oct 31 |
+| GBM drift estimator $\hat\mu=\bar r/\Delta+\hat\sigma^2/2$ | Avoid double-subtracting $\sigma^2/2$ |
+| Real-terms OU, re-inflated at $\pi$ | Nominal/real conflict; nominal $\theta$ biased low |
+| ADF test for mean reversion (not OLS t on $\phi$) | Unit-root null is non-standard |
+| Correlation on standardized residuals; total correlation summary | Log-return correlation is only approximate for OU; white paper §6 |
+| Unit-cost margin model with realized-price basis | Linear margin on 3 points gave a quadratic EBITDA; 10-second defensibility |
+| v0.1 fixed vs scaled aggregation bounds | Scaling Al ×4.9 alone overstated group volatility |
+| Monthly LTM, quarterly (or covenant) test dates; quarterly waterfall | White paper §4: monitoring frequency biases breach p (illustration: annual 0.178 vs quarterly 0.214) |
+| EBITDA ≤ 0 = breach; Jensen gap reported | White paper §5 convexity; $L$ convex in EBITDA |
+| Cash equation and floor; amortization and refinancing stated; interest on $D_{q-1}$ | Cash was undefined; circularity; DSCR inconsistency |
+| Tax on EBITDA − D&A − interest with $\tau_{\text{eff}}$ | EBIT was undefined; interest shield; zakat |
+| Capex ladders linked to volume ramps; capex frontier output | Without linkage, breach biased up and deferral looks free; $p\approx1$ at full plan scale |
+| Collar strikes at model-implied forward | Spot strikes under OU create a free lunch |
+| Deferral cost tracked; stretch optimization objective carries hedge and deferral costs | White paper §2 lesson: objective without a binding constraint is trivially solved |
+| Antithetic pair-mean CI; rule of three; Bonferroni | iid Bernoulli CI invalid on pairs; zero-width CI at $\hat p=0$; multiplicity (L14) |
+| Pre-drawn arrays module (`draws.py`) | CRN silently fails if policies call the RNG |
+| Disruptions: overlaps don't stack; $\lambda$ as scenario grid | Unspecified overlaps; rare events can't be fitted |
+| Gold held at LTM if cut (not dropped) | BMNM ~23% of group EBITDA at 63% margin (H1-25) |
+| Jump / residual-bootstrap robustness (optional) | Gaussian shocks understate 2022-type tails; white paper §5 |
+| Draft submitted Nov 20; present Dec 2 | Away Nov 21-29; draft graded on submission |
+| AI transcript export in rules and ritual | Missing transcript = half grade |
+| FY20-22 segment data added to Phase 2 | OOS validation needs realized EBITDA |
+| Project name "INDENG 174" | Docs live there |
+
+---
+
+## 11. Open questions (resolve from filings)
+
+| Question | Where |
+|---|---|
+| Unit header of statements (SAR '000 vs SAR m) | Each statement header |
+| \$5.7B: net or gross? Leases included? | Balance sheet + borrowings note; AGBI |
+| Covenant test frequency and definitions | Borrowings note, facility terms |
+| Attributable share of \$110B; phasing | Annual report, capex disclosures |
+| Feedstock pricing (gas, sulfur, ammonia): administered or market-linked? | Cost of sales note; annual report |
+| Realized Al price basis vs LME | Results release |
+
+---
+
+## 12. Schedule and hours
+
+| Phase | Dates | Hrs | Gate |
+|---|---|---|---|
+| 0 | Oct 24 | 4 | Done |
+| 0.2 fix-ups | Oct 27 | 0.5 | Tests pass |
+| 1a inputs | Oct 27-28 | 2 | Gate keys filled, sanity checks pass |
+| 1b v0.1 | Oct 29-31 | 6 | Tag v0.1, repo public, resume bullet |
+| 2 | Nov 1-7 | 4 | JPM submitted (closes Nov 6, 3:55 pm Riyadh) |
+| 3 v0.2 | Nov 8-14 | 10 | **Nov 13 kill check** |
+| 4 v0.3 | Nov 16-20 | 8 | Tag v0.3 |
+| 5 | Nov 20 / Dec 2 | 2 | Draft submitted Nov 20; present Dec 2 |
+| 6 v1.0 | Dec 3-8 | 7 | Tag v1.0 |
+| 7 | Dec 9-12 | 6 | Report + memo |
+| 8 | Dec 13-16 | 4 | Submit by Dec 16, 11 pm PT |
+| **Total** | | **53.5** | Remaining: 49.5 |

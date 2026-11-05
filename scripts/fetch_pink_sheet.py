@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 import requests
 
-URL = ("https://thedocs.worldbank.org/en/doc/18675f1d1639c7a34d463f59263ba0a2-0050012025/"
+URL = ("https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/"
        "related/CMO-Historical-Data-Monthly.xlsx")
 SHEET = "Monthly Prices"
 HEADER_ROW = 4  # 0-indexed -> sheet row 5
@@ -33,15 +33,15 @@ def main(url=URL):
     df = raw[["date"] + list(COLUMNS)].rename(columns=COLUMNS)
     for c in COLUMNS.values():
         df[c] = pd.to_numeric(df[c], errors="coerce")  # '..' placeholders -> NaN
-    # Isolated source gaps after 2010 are forward-filled and reported (never silent).
-    recent = df["date"] >= "2010-01-01"
-    gaps = df.loc[recent & df[list(COLUMNS.values())].isna().any(axis=1), "date"]
-    for d in gaps:
-        print(f"WARNING: source gap at {d:%Y-%m}; forward-filled from prior month")
-    df.loc[recent] = df.loc[recent].ffill()
+    # No silent repair: source gaps stay NaN (logged in docs/decisions.md).
+    for col in COLUMNS.values():
+        n = int(df.loc[df["date"] >= "2010-01-01", col].isna().sum())
+        if n:
+            print(f"NOTE: {col} has {n} NaN row(s) since 2010-01 (left as NaN)")
     df["date"] = df["date"].dt.strftime("%Y-%m-%d")
     OUT.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(OUT, index=False)
+    print(f"last date: {df['date'].iloc[-1]}")
     print(f"wrote {len(df)} rows {df['date'].iloc[0]}..{df['date'].iloc[-1]} -> {OUT}")
 
 

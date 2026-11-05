@@ -23,6 +23,9 @@ def test_iso_dates():
     assert d.is_monotonic_increasing
 
 
-def test_no_nans_after_2010():
+MODEL_COLS = ["aluminum", "dap", "gold"]
+
+
+def test_no_nans_after_2010_model_columns():
     df = load()
-    assert not df[df["date"] >= "2010-01-01"].isna().any().any()
+    assert not df.loc[df["date"] >= "2010-01-01", MODEL_COLS].isna().any().any()

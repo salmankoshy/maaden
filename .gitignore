@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .pytest_cache/
 # results/figures/*.png are tracked (kept)
+.venv/
