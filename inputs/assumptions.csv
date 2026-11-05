@@ -1,37 +1,82 @@
-key,value,unit,period,source,page,date_retrieved
-al_sales,NOT_FILLED,,H1-26,"Segment note + results release (Aluminium)",,
-al_sales,NOT_FILLED,,FY25,"Segment note + results release (Aluminium)",,
-al_sales,NOT_FILLED,,FY24,"Segment note + results release (Aluminium)",,
-al_sales,NOT_FILLED,,H1-25,"Segment note + results release (Aluminium)",,
-al_ebitda,NOT_FILLED,,H1-26,"Segment note + results release (Aluminium)",,
-al_ebitda,NOT_FILLED,,FY25,"Segment note + results release (Aluminium)",,
-al_ebitda,NOT_FILLED,,FY24,"Segment note + results release (Aluminium)",,
-al_ebitda,NOT_FILLED,,H1-25,"Segment note + results release (Aluminium)",,
-al_volume_t,NOT_FILLED,,H1-26,"Segment note + results release (Aluminium)",,
-al_volume_t,NOT_FILLED,,FY25,"Segment note + results release (Aluminium)",,
-al_volume_t,NOT_FILLED,,FY24,"Segment note + results release (Aluminium)",,
-al_volume_t,NOT_FILLED,,H1-25,"Segment note + results release (Aluminium)",,
-al_realized_usd_t,NOT_FILLED,,H1-26,"Segment note + results release (Aluminium)",,
-al_realized_usd_t,NOT_FILLED,,FY25,"Segment note + results release (Aluminium)",,
-al_realized_usd_t,NOT_FILLED,,FY24,"Segment note + results release (Aluminium)",,
-al_realized_usd_t,NOT_FILLED,,H1-25,"Segment note + results release (Aluminium)",,
-group_ebitda,NOT_FILLED,,FY25,"Segment note / results release",,
-group_ebitda,NOT_FILLED,,H1-26,"Segment note / results release",,
-group_ebitda,NOT_FILLED,,H1-25,"Segment note / results release",,
-phosphate_ebitda,NOT_FILLED,,FY25,"Segment note",,
-phosphate_ebitda,NOT_FILLED,,H1-26,"Segment note",,
-phosphate_ebitda,NOT_FILLED,,H1-25,"Segment note",,
-bmnm_ebitda,NOT_FILLED,,FY25,"Segment note",,
-bmnm_ebitda,NOT_FILLED,,H1-26,"Segment note",,
-bmnm_ebitda,NOT_FILLED,,H1-25,"Segment note",,
-corporate_ebitda,NOT_FILLED,,FY25,"Segment note",,
-corporate_ebitda,NOT_FILLED,,H1-26,"Segment note",,
-corporate_ebitda,NOT_FILLED,,H1-25,"Segment note",,
-total_borrowings,NOT_FILLED,,H1-26,"Balance sheet + borrowings note (leases as separate row)",,
-cash_and_deposits,NOT_FILLED,,H1-26,"Balance sheet",,
-reported_nd_ebitda,NOT_FILLED,,H1-26,"Results release (reconciliation check only)",,
-fx_sar_per_usd,NOT_FILLED,,n/a,"SAMA",,
-breach_threshold_low,NOT_FILLED,,n/a,"Analyst assumption, decisions.md until Phase 2",,
-breach_threshold_high,NOT_FILLED,,n/a,"Analyst assumption, decisions.md until Phase 2",,
-covenant_test_freq_months,NOT_FILLED,,n/a,"Borrowings note; default 3 until found",,
-price_anchor_date,NOT_FILLED,,n/a,"Last month in inputs/prices_monthly.csv",,
+key,value,unit,period,source,page,date_retrieved,source_url,note
+al_ebitda,1539,SAR m,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+al_ebitda,1009,SAR m,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,Q1-FY26 column
+al_ebitda,1617,SAR m,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_ebitda,755,SAR m,Q3-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",4,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+al_ebitda,656,SAR m,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,Q2-FY25 column; same in REL_Q3_25 p4
+al_ebitda,814,SAR m,Q1-25,Derived from rows cited in note,,2026-11-04,,"9M-25 2,225 (REL_Q3_25 p4) - Q3 755 - Q2 656; check: Q1-26 release USD 217 x 3.75 = 814"
+al_ebitda,3842,SAR m,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_ebitda,2950,SAR m,FY24,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_sales,3794,SAR m,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+al_sales,2771,SAR m,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+al_sales,2924,SAR m,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_sales,2805,SAR m,Q3-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",4,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+al_sales,2550,SAR m,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+al_sales,10988,SAR m,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_sales,10057,SAR m,FY24,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_production_kmt,242,kmt,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,Primary aluminum production. Sales volume not disclosed for 2026 quarters
+al_production_kmt,248,kmt,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+al_production_kmt,258,kmt,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_production_kmt,246,kmt,Q3-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",4,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+al_production_kmt,247,kmt,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+al_production_kmt,249,kmt,Q1-25,"Maaden Q1-2026 results release (USD), 3 May 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/6e91c5b9-6fb9-4f78-af76-f1906da46a9f.pdf,
+al_production_kmt,999,kmt,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_production_kmt,986,kmt,FY24,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_sales_volume_kmt,593,kmt,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,Primary aluminum only; FRP 309 kmt sold separately
+al_sales_volume_kmt,608,kmt,FY24,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,FRP 275 kmt
+al_sales_volume_kmt,158,kmt,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_sales_volume_kmt,156,kmt,Q3-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",4,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+al_sales_volume_kmt,136,kmt,Q2-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",4,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+al_realized_usd_t,3915,USD/t,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+al_realized_usd_t,3282,USD/t,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,Same in REL_Q1_26 p2
+al_realized_usd_t,2809,USD/t,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_realized_usd_t,2734,USD/t,Q3-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",4,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+al_realized_usd_t,2600,USD/t,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,"CONFLICT: REL_Q3_25 p4 shows 2,701 for Q2-FY25"
+al_realized_usd_t,2716,USD/t,Q1-25,"Maaden Q1-2026 results release (USD), 3 May 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/6e91c5b9-6fb9-4f78-af76-f1906da46a9f.pdf,
+al_realized_usd_t,2693,USD/t,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_realized_usd_t,2485,USD/t,FY24,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_cost_per_t_usd,2162,USD/t,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,"Company-reported avg cost per ton, aluminum"
+al_cost_per_t_usd,2220,USD/t,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+al_cost_per_t_usd,2040,USD/t,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_cost_per_t_usd,2233,USD/t,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+al_cost_per_t_usd,2561,USD/t,Q1-25,"Maaden Q1-2026 results release (USD), 3 May 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/6e91c5b9-6fb9-4f78-af76-f1906da46a9f.pdf,
+al_cost_per_t_usd,2217,USD/t,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+al_cost_per_t_usd,2201,USD/t,FY24,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+phosphate_ebitda,1230,SAR m,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+phosphate_ebitda,1798,SAR m,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+phosphate_ebitda,2194,SAR m,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+phosphate_ebitda,2904,SAR m,Q3-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",3,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+phosphate_ebitda,2418,SAR m,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,Same in REL_Q3_25 p3
+phosphate_ebitda,9683,SAR m,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+bmnm_ebitda,1254,SAR m,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,Segment renamed Gold and Growth Minerals in Q2-26 release
+bmnm_ebitda,1427,SAR m,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+bmnm_ebitda,1520,SAR m,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",3,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+bmnm_ebitda,887,SAR m,Q3-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",5,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+bmnm_ebitda,860,SAR m,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,Same in REL_Q3_25 p5
+bmnm_ebitda,4074,SAR m,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",3,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+group_ebitda,16159,SAR m,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+group_ebitda,4629,SAR m,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+group_ebitda,4276,SAR m,Q3-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+group_ebitda,3785,SAR m,Q2-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+group_ebitda,11530,SAR m,9M-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+group_ebitda,3469,SAR m,Q1-25,Derived from rows cited in note,,2026-11-04,,"9M-25 11,530 - Q3 4,276 - Q2 3,785"
+group_ebitda,964,USD m,Q1-26,"Maaden Q1-2026 results release (USD), 3 May 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/6e91c5b9-6fb9-4f78-af76-f1906da46a9f.pdf,"USD only; x3.75 = SAR 3,615 (converted)"
+group_ebitda,3900,SAR m,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,"ROUNDED headline ""SAR3.9bn""; exact figure not in release"
+total_borrowings,32429.42,SAR m,31-Dec-25,Maaden Integrated Report 2025 incl. audited consolidated FS,"195 (printed 193), Note 47",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,Latest audited. H1-26 balance sheet not yet obtained
+lease_liabilities,1414.85,SAR m,31-Dec-25,Maaden Integrated Report 2025 incl. audited consolidated FS,"195 (printed 193), Note 47",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,Company net debt excludes leases (reconciles to 1.3x)
+cash_and_equivalents,10583.55,SAR m,31-Dec-25,Maaden Integrated Report 2025 incl. audited consolidated FS,"195 (printed 193), Note 47",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+time_deposits,219.42,SAR m,31-Dec-25,Maaden Integrated Report 2025 incl. audited consolidated FS,"195 (printed 193), Note 47",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+reported_nd_ebitda,1.3,x,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,14,2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+reported_nd_ebitda,1.2,x,Q1-26,"Maaden Q1-2026 results release (USD), 3 May 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/6e91c5b9-6fb9-4f78-af76-f1906da46a9f.pdf,
+reported_nd_ebitda,1.5,x,Q3-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",1,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+target_nd_ebitda_low,2.0,x,policy,"Maaden Q1-2026 results release (USD), 3 May 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/6e91c5b9-6fb9-4f78-af76-f1906da46a9f.pdf,"""below the target range of 2-3x"""
+target_nd_ebitda_high,3.0,x,policy,"Maaden Q1-2026 results release (USD), 3 May 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/6e91c5b9-6fb9-4f78-af76-f1906da46a9f.pdf,
+undrawn_facilities,14450,SAR m,31-Dec-25,Maaden Integrated Report 2025 incl. audited consolidated FS,"195 (printed 193), Note 46.3",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,"Incl. syndicated RCF 11,250"
+capex_guidance_2026,15500,SAR m,FY26,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",3,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,"Growth 12,600; Q1-26 release: ~USD 4.2bn, growth 3.4bn"
+covenants_disclosed,no,,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,"184, Note 35.13",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,Covenants exist; levels not disclosed; in compliance at 31-Dec-25
+fx_sar_per_usd,3.75,SAR/USD,peg,Analyst assumption; see docs/decisions.md,,2026-11-04,,SAMA peg
+breach_threshold_low,2.5,x,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Phase 2 review: inside company 2-3x target range
+breach_threshold_high,3.0,x,,Analyst assumption; see docs/decisions.md,,2026-11-04,,= top of company target range
+covenant_test_freq_months,3,months,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Default; covenant terms not disclosed
+price_anchor_date,2026-10-01,date,,Derived from rows cited in note,,2026-11-04,,Last month in inputs/prices_monthly.csv
+corporate_ebitda,NOT_FILLED,,,Segment note; not in extract (derive from group minus segments in checks only),,,,

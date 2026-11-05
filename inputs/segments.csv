@@ -1,1 +1,21 @@
 period,segment,sales,ebitda,volume,volume_unit,realized_price,source,page
+FY24,aluminum,10057,2950,986,kmt production,2485,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2
+FY25,aluminum,10988,3842,999,kmt production,2693,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2
+Q1-25,aluminum,,814,249,kmt production,2716,"Derived from rows cited in note | Maaden Q1-2026 results release (USD), 3 May 2026",2
+Q1-26,aluminum,2771,1009,248,kmt production,3282,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2
+Q2-25,aluminum,2550,656,247,kmt production,2600,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026 | Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",2 | 4
+Q2-26,aluminum,3794,1539,242,kmt production,3915,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2
+Q3-25,aluminum,2805,755,246,kmt production,2734,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",4
+Q4-25,aluminum,2924,1617,258,kmt production,2809,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2
+FY25,bmnm,,4074,,,,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",3
+Q1-26,bmnm,,1427,,,,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2
+Q2-25,bmnm,,860,,,,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2
+Q2-26,bmnm,,1254,,,,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2
+Q3-25,bmnm,,887,,,,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",5
+Q4-25,bmnm,,1520,,,,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",3
+FY25,phosphate,,9683,,,,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2
+Q1-26,phosphate,,1798,,,,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1
+Q2-25,phosphate,,2418,,,,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1
+Q2-26,phosphate,,1230,,,,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1
+Q3-25,phosphate,,2904,,,,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",3
+Q4-25,phosphate,,2194,,,,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2
