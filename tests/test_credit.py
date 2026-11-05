@@ -64,3 +64,41 @@ def test_waterfall_first_year_by_hand(inp):
 def test_tax_floor_at_zero(inp):
     w = credit.waterfall(inp["da"] * 0.5, 0.0, inp)
     assert (w["tax"] == 0).all()
+
+
+@pytest.mark.parametrize("mult,x,want", [("flat", "high", 17113), ("minus10", "high", 14855),
+                                         ("minus20", "high", 12596), ("flat", "low", 15639)])
+def test_breakeven_targets(inp, mult, x, want):
+    b = credit.breakeven(inp, inp["multipliers"][mult], inp["thresholds"][x])
+    assert b["capex"] == pytest.approx(want, abs=5)
+    assert b["L_path"][-1] >= inp["thresholds"][x]
+
+
+def test_rate_shock_breakevens(inp):
+    m, x = inp["multipliers"]["flat"], inp["thresholds"]["high"]
+    base = credit.breakeven(inp, m, x)["capex"]
+    all_debt = credit.breakeven(inp, m, x, credit.shocked_rate(inp, "all"))["capex"]
+    floating = credit.breakeven(inp, m, x, credit.shocked_rate(inp, "floating"))["capex"]
+    assert all_debt == pytest.approx(16755, abs=5)
+    assert all_debt < floating < base
+
+
+def test_zero_capex_debt_non_increasing(inp):
+    w = credit.waterfall(inp["ebitda"], 0.0, inp)
+    assert (w["fcf"] > 0).all()
+    assert (np.diff(w["D"]) <= 0).all()
+
+
+def test_leverage_monotone_in_capex(inp):
+    capex = np.linspace(*inp["search"][:2], 200)
+    L = [credit.waterfall(inp["ebitda"], c, inp)["L"][-1] for c in capex]
+    assert (np.diff(L) > 0).all()
+
+
+def test_first_breach_year_is_in_horizon(inp):
+    for r in credit.breakeven_table(inp):
+        assert r["first_breach_year"] in inp["years"]
+
+
+def test_nonpositive_ebitda_is_infinite_leverage(inp):
+    assert np.isinf(credit.waterfall(0.0, 0.0, inp)["L"]).all()
