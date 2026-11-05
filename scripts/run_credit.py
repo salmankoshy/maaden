@@ -8,7 +8,7 @@ sys.path.insert(0, str(ROOT))
 
 import pandas as pd  # noqa: E402
 
-from src import credit  # noqa: E402
+from src import credit, credit_xlsx  # noqa: E402
 from src.report_utils import clean, git_hash  # noqa: E402
 
 RES = ROOT / "results"
@@ -58,6 +58,7 @@ def write_outputs(out):
 def main():
     out = build()
     write_outputs(out)
+    credit_xlsx.build(RES / "maaden_credit_model.xlsx", credit.load_inputs(), out["breakeven"])
     print(f"wrote {RES / 'credit.json'} and credit tables")
     return out
 

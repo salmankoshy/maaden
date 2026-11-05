@@ -104,3 +104,7 @@ Antithetic pairs (Z, -Z): p-hat is the mean of pair means, CI from the sample st
 - +100 bp "floating share only" is a blended rate r + floating share x 1%, with the share held at its 31-Dec-25 value (fixed sukuk share of principal). Applying it to all debt is computed beside it as a bound.
 - Breakeven reports the upper end of the bisection bracket, so L_2030 is just above x at that capex. Bracket width is in `credit_capex_search_tol`.
 - Tax base uses `tau_eff`, which includes severance fees; FY25 D&A and NCI dividends held flat.
+
+## 22. Excel model verification
+
+Formulas not machine-verified: LibreOffice is not installed on the build machine, so no spreadsheet engine recalculated the workbook. `tests/test_credit_xlsx.py` evaluates the Metrics, Waterfall and Maturities formulas with a small Python evaluator and matches `src/credit.py` within 0.01, at three capex levels. That checks logic and references, not Excel itself. The file has no cached values, so previewers show blanks until Excel opens and calculates it (full calculation on load is set).

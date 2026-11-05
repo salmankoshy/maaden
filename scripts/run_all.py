@@ -6,8 +6,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-import numpy as np  # noqa: E402
-
 from src import analysis, plots, simulate  # noqa: E402
 from src.report_utils import clean, git_hash  # noqa: E402
 import run_credit  # noqa: E402
