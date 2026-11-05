@@ -88,3 +88,7 @@ Antithetic pairs (Z, -Z): p-hat is the mean of pair means, CI from the sample st
 - segments.csv column `segment` uses `aluminum`, `phosphate`, `bmnm` (renamed Gold and Growth Minerals in Q2-26).
 - Extract columns `source_url` and `note` are carried into assumptions.csv as extra trailing columns.
 - Source PDFs: 3 of 5 downloaded to `source/` (Q2-26 release, Q1-26 release, Integrated Report 2025). The Q4/FY25 and Q3-25 releases on saudiexchange.sa returned HTTP 403 and were not obtained; fetch them manually in a browser.
+
+## 20. Credit core: add1 ingest
+
+`source/maaden_extracted_inputs_add1.csv` (97 rows) is appended to `assumptions.csv` by `scripts/ingest_add1.py`, values as strings, mapped by column name because the source column order differs. Existing rows are unchanged. Scenario settings are separate rows with source `ANALYST`. The four PLACEHOLDER rows are present in the file but no credit code reads them. `scripts/ingest_extracted.py` rebuilds the file from the first extract only, so running it requires re-running `ingest_add1.py`.

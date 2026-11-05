@@ -98,3 +98,121 @@ calib_quarters,"Q1-26,Q2-26",,,Analyst assumption; see docs/decisions.md,,2026-1
 ltm_hist_quarters,"Q3-25,Q4-25,Q1-26,Q2-26",,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Reported quarters feeding the LTM and non-Al LTM
 backtest_periods,"Q4-25,Q3-25,FY25,FY24",,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Periods with production volumes for the margin back-test
 nd_anchor_period,31-Dec-25,,,Analyst assumption; see docs/decisions.md,,2026-11-04,,Balance sheet date for net debt
+phosphate_sales,5119,SAR m,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+phosphate_sales,3971,SAR m,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+phosphate_sales,5183,SAR m,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+phosphate_sales,5628,SAR m,Q3-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",3,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+phosphate_sales,20773,SAR m,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+dap_production_kmt,1230,kmt,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+dap_production_kmt,1713,kmt,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+dap_production_kmt,1705,kmt,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+dap_production_kmt,1754,kmt,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+dap_production_kmt,6723,kmt,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+dap_sales_volume_kmt,1791,kmt,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+dap_sales_volume_kmt,6749,kmt,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+ammonia_production_kmt,267,kmt,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,Ammonia guidance withdrawn in Q2-26 release
+ammonia_production_kmt,675,kmt,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+ammonia_production_kmt,3008,kmt,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+dap_realized_usd_t,863,USD/t,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+dap_realized_usd_t,666,USD/t,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+dap_realized_usd_t,677,USD/t,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",1,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+dap_realized_usd_t,705,USD/t,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+dap_realized_usd_t,695,USD/t,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+dap_realized_usd_t,583,USD/t,FY24,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+ammonia_realized_usd_t,754,USD/t,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,Row continues on page 2
+ammonia_realized_usd_t,529,USD/t,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+dap_guidance_fy26_kmt_low,6000,kmt,FY26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,"Revised guidance 6,000-6,500 kt"
+dap_guidance_fy26_kmt_high,6500,kmt,FY26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+bmnm_sales,1962,SAR m,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+bmnm_sales,1884,SAR m,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+bmnm_sales,1461,SAR m,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+bmnm_sales,1499,SAR m,Q3-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",5,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+bmnm_sales,2139,SAR m,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",3,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+bmnm_sales,6286,SAR m,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",3,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+gold_production_koz,118,koz,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+gold_production_koz,105,koz,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+gold_production_koz,108,koz,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+gold_production_koz,115,koz,Q3-25,"Maaden Q3-2025 earnings release (SAR), 6 Nov 2025",5,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/28113_370_2025-11-06_09-21-45_en.pdf,
+gold_production_koz,133,koz,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",3,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+gold_production_koz,478,koz,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",3,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+gold_realized_usd_oz,4413,USD/oz,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+gold_realized_usd_oz,4775,USD/oz,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+gold_realized_usd_oz,3316,USD/oz,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+gold_realized_usd_oz,4213,USD/oz,Q4-25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",3,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+gold_realized_usd_oz,3511,USD/oz,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",3,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+gold_aisc_usd_oz,1236,USD/oz,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+gold_aisc_usd_oz,1052,USD/oz,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+gold_aisc_usd_oz,1291,USD/oz,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",3,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+gold_guidance_fy26_koz_low,470,koz,FY26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",3,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+gold_guidance_fy26_koz_high,515,koz,FY26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",3,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+al_guidance_fy26_kmt_low,950,kmt,FY26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",3,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+al_guidance_fy26_kmt_high,1020,kmt,FY26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",3,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+alumina_realized_usd_t,315,USD/t,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,Below alumina cost 355 -> explains v0.1 back-test miss
+alumina_realized_usd_t,315,USD/t,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+alumina_realized_usd_t,393,USD/t,Q2-25,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+alumina_realized_usd_t,422,USD/t,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+alumina_realized_usd_t,483,USD/t,FY24,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+alumina_cost_usd_t,355,USD/t,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+alumina_cost_usd_t,285,USD/t,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+alumina_cost_usd_t,325,USD/t,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+alumina_production_kmt,433,kmt,Q2-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+alumina_production_kmt,466,kmt,Q1-26,"Maaden Q2-2026 results release (SAR version), 9 Aug 2026",2,2026-11-04,https://argaamplus.s3.amazonaws.com/bf5ee0d7-61f5-4e96-adf0-a40cfc1f6e94.pdf,
+alumina_production_kmt,1891,kmt,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,
+alumina_sales_volume_kmt,344,kmt,FY25,"Maaden Q4/FY2025 results release (SAR), 5 Mar 2026",2,2026-11-04,https://www.saudiexchange.sa/Resources/fsPdf/31073_370_2026-03-05_15-41-48_en.pdf,External alumina sales; most alumina feeds own smelter
+profit_before_zakat_tax_severance,10030.11,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,"128 (printed 126), statement of profit or loss",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,"10,030,111,809"
+income_tax_credit,129.14,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,128 (printed 126),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,"Positive = credit; 129,138,478"
+zakat_expense,373.24,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,128 (printed 126),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,"373,242,718"
+severance_fees,1258.03,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,128 (printed 126),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,"1,258,027,213; mining severance fee (royalty-like); treatment logged in decisions.md"
+finance_cost,2172.48,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,128 (printed 126),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,"2,172,477,983 incl. all finance costs"
+finance_income,636.01,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,128 (printed 126),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+tau_eff,0.1498,ratio,FY25,Derived from rows cited in note,,2026-11-04,,"(zakat 373.24 - income tax credit 129.14 + severance 1,258.03) / PBT 10,030.11. Ex-severance = 0.0243"
+da_mine_properties,965.22,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,"131 (printed 129), cash flow statement",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+da_ppe,3161.59,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,131 (printed 129),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+da_rou,341.3,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,131 (printed 129),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+da_intangibles,30.07,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,131 (printed 129),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+da_total,4498.19,SAR m,FY25,Derived from rows cited in note,,2026-11-04,,Sum of the four D&A rows above
+capex_mine_properties,775.07,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,"131 (printed 129), investing activities",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+capex_ppe,595.72,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,131 (printed 129),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+capex_cwip,5527.44,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,131 (printed 129),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+capex_intangibles,9.66,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,131 (printed 129),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+capex_total_fy25,6907.88,SAR m,FY25,Derived from rows cited in note,,2026-11-04,,"Sum of four additions rows; excludes JV investment 3,666.49"
+jv_investment_fy25,3666.49,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,131 (printed 129),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,Investment in joint ventures and an associate
+dividends_to_shareholders_fy25,0,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,131 (printed 129),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,No dividend to parent shareholders in FY25 cash flow
+dividends_to_nci_fy25,716.25,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,131 (printed 129),2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,Dividend paid to non-controlling interest
+interest_expense_borrowings,1845.43,SAR m,FY25,Maaden Integrated Report 2025 incl. audited consolidated FS,"195 (printed 193), Note 47",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+effective_interest_rate,0.0538,ratio,FY25,Derived from rows cited in note,,2026-11-04,,"1,845.43 / avg borrowings (36,115.61 + 32,429.42)/2. Use as all-in r until SOFR+spread sourced"
+debt_maturity_principal,2807.08,SAR m,2026,Maaden Integrated Report 2025 incl. audited consolidated FS,"183 (printed 97), Note 35.10",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+debt_maturity_principal,2631.61,SAR m,2027,Maaden Integrated Report 2025 incl. audited consolidated FS,"183, Note 35.10",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+debt_maturity_principal,3147.43,SAR m,2028,Maaden Integrated Report 2025 incl. audited consolidated FS,"183, Note 35.10",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+debt_maturity_principal,4323.25,SAR m,2029,Maaden Integrated Report 2025 incl. audited consolidated FS,"183, Note 35.10",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+debt_maturity_principal,7622.71,SAR m,2030,Maaden Integrated Report 2025 incl. audited consolidated FS,"183, Note 35.10",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,Includes USD 750m 5Y sukuk due 13-Feb-2030
+debt_maturity_principal,11996.75,SAR m,2031+,Maaden Integrated Report 2025 incl. audited consolidated FS,"183, Note 35.10",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,
+debt_principal_total,32528.83,SAR m,31-Dec-25,Maaden Integrated Report 2025 incl. audited consolidated FS,"181 (printed 95), Note 35",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,"Carrying value 32,429.42 after costs/accrued"
+sukuk_fixed_principal,5663.64,SAR m,31-Dec-25,Maaden Integrated Report 2025 incl. audited consolidated FS,"181, Note 35.6",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,USD 750m 5.25% due 2030 + USD 750m 5.50% due 2035; fixed
+fixed_rate_share,0.1741,ratio,31-Dec-25,Derived from rows cited in note,,2026-11-04,,"Sukuk 5,663.64 / principal 32,528.83; other facilities floating (market rate + margin)"
+rcf_undrawn,11250,SAR m,31-Dec-25,Maaden Integrated Report 2025 incl. audited consolidated FS,"183, Note 35.9",2026-11-04,https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf,Fully undrawn
+capex_ladder_base_annual,15500,SAR m,2026-2030,PLACEHOLDER analyst assumption for overnight machinery test; Salman must replace,,2026-11-04,,2026 guidance held flat. NOT the $110B plan (~SAR 41bn/yr). Machinery test only
+pi_expected_inflation,0.025,ratio,annual,PLACEHOLDER analyst assumption for overnight machinery test; Salman must replace,,2026-11-04,,Replace with sourced forecast
+cash_floor_c_min,5000,SAR m,,PLACEHOLDER analyst assumption for overnight machinery test; Salman must replace,,2026-11-04,,
+repay_share_phi,0.5,ratio,,PLACEHOLDER analyst assumption for overnight machinery test; Salman must replace,,2026-11-04,,
+credit_ebitda_multiplier,1.0,x,flat,ANALYST,,2026-11-04,,Scenario: FY25 group EBITDA held flat
+credit_ebitda_multiplier,0.9,x,minus10,ANALYST,,2026-11-04,,"Scenario: FY25 group EBITDA x0.9, held flat"
+credit_ebitda_multiplier,0.8,x,minus20,ANALYST,,2026-11-04,,"Scenario: FY25 group EBITDA x0.8, held flat"
+credit_threshold,2.5,x,low,ANALYST,,2026-11-04,,Inside company 2-3x target range; not a covenant
+credit_threshold,3.0,x,high,ANALYST,,2026-11-04,,"Top of company 2-3x target range; management ceiling, not a covenant"
+credit_rate_shock_bp,100,bp,,ANALYST,,2026-11-04,,Rate sensitivity
+credit_first_year,2026,year,,ANALYST,,2026-11-04,,First waterfall year (from 31-Dec-25)
+credit_last_year,2030,year,,ANALYST,,2026-11-04,,Last waterfall year
+credit_capex_search_low,0,SAR m,,ANALYST,,2026-11-04,,Bisection lower bound
+credit_capex_search_high,60000,SAR m,,ANALYST,,2026-11-04,,Bisection upper bound
+credit_capex_search_tol,0.01,SAR m,,ANALYST,,2026-11-04,,Bisection stopping width
+credit_chart_capex_low,8000,SAR m,,ANALYST,,2026-11-04,,Breakeven chart x-axis start
+credit_chart_capex_high,25000,SAR m,,ANALYST,,2026-11-04,,Breakeven chart x-axis end
+credit_chart_capex_step,250,SAR m,,ANALYST,,2026-11-04,,Breakeven chart x-axis step
+credit_mc_capex_low,10000,SAR m,,ANALYST,,2026-11-04,,Tier 2 capex grid start
+credit_mc_capex_high,22000,SAR m,,ANALYST,,2026-11-04,,Tier 2 capex grid end
+credit_mc_capex_step,500,SAR m,,ANALYST,,2026-11-04,,Tier 2 capex grid step
+credit_mc_curve_x_low,2,x,,ANALYST,,2026-11-04,,Tier 2 breach curve start
+credit_mc_curve_x_high,5,x,,ANALYST,,2026-11-04,,Tier 2 breach curve end
+credit_mc_curve_x_step,0.05,x,,ANALYST,,2026-11-04,,Tier 2 breach curve step
+credit_mc_ci_z,1.96,,,ANALYST,,2026-11-04,,Normal quantile for 95% CI on antithetic pair means
