@@ -4,3 +4,4 @@ __pycache__/
 .pytest_cache/
 # results/figures/*.png are tracked (kept)
 .venv/
+docs/ai_transcripts/

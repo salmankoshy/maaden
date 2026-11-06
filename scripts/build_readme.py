@@ -132,6 +132,9 @@ python scripts/build_readme.py   # regenerates this file from the result files
 ```
 
 `run_all.py` never fetches data. Inputs are in `inputs/` (sourced, see `assumptions.csv`); modeling choices in `docs/decisions.md`.
+
+## AI assistance
+Built with Anthropic's Claude: Claude Code for code and tests, Claude chat for review and filing extraction. I chose the question, sourced and checked every input against Ma'aden's filings (page references in inputs/assumptions.csv), and made the modeling decisions (logged with reasons in docs/decisions.md).
 """
     (ROOT / "README.md").write_text(text, encoding="utf-8", newline="\n")
     print("wrote README.md")

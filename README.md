@@ -72,7 +72,7 @@ A 12-month aluminium price module, built first as a prototype. It has no cash-fl
 - Net debt anchor is 31-Dec-25 (H1-26 balance sheet not yet obtained).
 - The unit-cost model does not back-test well outside H1-26 (below).
 
-### Results (seed 42, git 01d9947)
+### Results (seed 42, git bcdcc74)
 
 Current leverage: fixed 1.305x, scaled 1.277x, reported-basis (LTM to Q2-26) 1.317x.
 
@@ -105,3 +105,6 @@ python scripts/build_readme.py   # regenerates this file from the result files
 ```
 
 `run_all.py` never fetches data. Inputs are in `inputs/` (sourced, see `assumptions.csv`); modeling choices in `docs/decisions.md`.
+
+## AI assistance
+Built with Anthropic's Claude: Claude Code for code and tests, Claude chat for review and filing extraction. I chose the question, sourced and checked every input against Ma'aden's filings (page references in inputs/assumptions.csv), and made the modeling decisions (logged with reasons in docs/decisions.md).
