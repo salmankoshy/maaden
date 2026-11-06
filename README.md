@@ -24,7 +24,7 @@ How much capex can Ma'aden carry before leverage crosses its own ceiling? Base: 
 | x0.9 | 13,528 | 14,855 | 2030 | 14,571 |
 | x0.8 | 11,416 | 12,596 | 2030 | 12,325 |
 
-At capex of 15,500 a year and flat EBITDA, leverage reaches 2.45x at end-2030.
+2026 capex guidance (SAR 15,500m) sits about 10% below the 3.0x breakeven of SAR 17,113m.
 
 **Rate sensitivity.** +100 bp on the floating share costs SAR 268.7m a year on today's principal and lowers the flat-EBITDA 3.0x breakeven from 17,113 to 16,817. Applied to all debt it would be 16,755.
 
