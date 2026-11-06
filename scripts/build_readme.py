@@ -23,7 +23,8 @@ def credit_section(c):
     mat = "\n".join(f"| {r['year']} | {r['principal']:,.2f} | {100 * r['share']:.1f}% |" for r in c["maturities"])
     flat = be[("flat", th["high"])]
     wall = next(r for r in c["maturities"] if r["year"] == "2030")
-    wf = c["waterfall_at_guidance"]
+    gap = 1 - b["capex_guidance_2026"] / flat["breakeven_capex"]
+    gap_5 = 5 * round(100 * gap / 5)  # "about": nearest 5%
     return f"""## Credit core (deterministic, FY25 audited base)
 
 How much capex can Ma'aden carry before leverage crosses its own ceiling? Base: audited balance sheet at 31-Dec-25, FY25 group EBITDA of SAR {b['ebitda']:,.0f}m. SAR m unless stated.
@@ -44,7 +45,7 @@ How much capex can Ma'aden carry before leverage crosses its own ceiling? Base: 
 |---|---|---|---|---|
 {rows}
 
-At capex of {b['capex_guidance_2026']:,.0f} a year and flat EBITDA, leverage reaches {wf[-1]['leverage']:.2f}x at end-2030.
+2026 capex guidance (SAR {b['capex_guidance_2026']:,.0f}m) sits about {gap_5:.0f}% below the {th['high']}x breakeven of SAR {flat['breakeven_capex']:,.0f}m.
 
 **Rate sensitivity.** +{b['shock_bp']:.0f} bp on the floating share costs SAR {m['rate_shock_cost']:,.1f}m a year on today's principal and lowers the flat-EBITDA {th['high']}x breakeven from {flat['breakeven_capex']:,.0f} to {flat['breakeven_capex_shock_floating']:,.0f}. Applied to all debt it would be {flat['breakeven_capex_shock_all_debt']:,.0f}.
 

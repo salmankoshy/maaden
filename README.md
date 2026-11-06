@@ -72,7 +72,7 @@ A 12-month aluminium price module, built first as a prototype. It has no cash-fl
 - Net debt anchor is 31-Dec-25 (H1-26 balance sheet not yet obtained).
 - The unit-cost model does not back-test well outside H1-26 (below).
 
-### Results (seed 42, git 95a0214)
+### Results (seed 42, git 01d9947)
 
 Current leverage: fixed 1.305x, scaled 1.277x, reported-basis (LTM to Q2-26) 1.317x.
 
